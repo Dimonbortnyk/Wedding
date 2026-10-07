@@ -291,6 +291,147 @@
       </div>
     </section>
 
+    <section class="section" id="rsvp">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="label" data-i18n="rsvp.label">Kindly respond</p>
+          <h2 class="title" data-i18n="rsvp.title">RSVP</h2>
+          <p class="lead" data-rsvp-deadline></p>
+        </header>
+
+        <div class="rsvp">
+          <div class="rsvp__aside reveal reveal--left">
+            <figure class="photo rsvp__photo" data-photo="rsvp.jpg">
+              <img src="assets/photos/rsvp.jpg" alt="" loading="lazy" decoding="async" data-i18n-attr="alt:rsvp.photoAlt">
+            </figure>
+            <blockquote class="rsvp__quote">
+              <p data-i18n="rsvp.quote">Can’t wait to celebrate with you!</p>
+              <footer>— <span data-config="couple.monogram">U &amp; D</span></footer>
+            </blockquote>
+          </div>
+
+          <div class="rsvp__main reveal reveal--right">
+            <form class="form" data-rsvp-form novalidate>
+              <div class="field">
+                <label class="field__label" for="rsvp-name">
+                  <span data-i18n="rsvp.name.label">Full name</span>
+                  <span class="field__hint" data-i18n="rsvp.name.hint">as on the invitation</span>
+                </label>
+                <input class="field__input" id="rsvp-name" name="full_name" type="text" autocomplete="name" maxlength="200" required aria-describedby="rsvp-name-error">
+                <p class="field__error" id="rsvp-name-error" data-error-for="full_name"></p>
+              </div>
+
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="rsvp-email" data-i18n="rsvp.email.label">Email</label>
+                  <input class="field__input" id="rsvp-email" name="email" type="email" autocomplete="email" maxlength="200" required aria-describedby="rsvp-email-error">
+                  <p class="field__error" id="rsvp-email-error" data-error-for="email"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="rsvp-phone">
+                    <span data-i18n="rsvp.phone.label">Phone</span>
+                    <span class="field__hint" data-i18n="rsvp.optional">optional</span>
+                  </label>
+                  <input class="field__input" id="rsvp-phone" name="phone" type="tel" autocomplete="tel" maxlength="40">
+                </div>
+              </div>
+
+              <fieldset class="field" aria-describedby="rsvp-attending-error">
+                <legend class="field__label" data-i18n="rsvp.attending.legend">Will you attend?</legend>
+                <div class="choices">
+                  <label class="choice">
+                    <input type="radio" name="attending" value="yes" required>
+                    <span class="choice__box"><span class="choice__mark" aria-hidden="true"></span><span data-i18n="rsvp.attending.yes">Joyfully accept</span></span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="attending" value="no">
+                    <span class="choice__box"><span class="choice__mark" aria-hidden="true"></span><span data-i18n="rsvp.attending.no">Regretfully decline</span></span>
+                  </label>
+                </div>
+                <p class="field__error" id="rsvp-attending-error" data-error-for="attending"></p>
+              </fieldset>
+
+              <!-- Everything in here is hidden when the guest declines. -->
+              <div class="form__group" data-attending-only>
+                <div class="form__row">
+                  <div class="field">
+                    <label class="field__label" for="rsvp-guests">
+                      <span data-i18n="rsvp.guests.label">Number of guests</span>
+                      <span class="field__hint" data-i18n="rsvp.guests.hint">including you</span>
+                    </label>
+                    <select class="field__input" id="rsvp-guests" name="guests_count" data-guests></select>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="rsvp-country" data-i18n="rsvp.country.label">Travelling from</label>
+                    <select class="field__input" id="rsvp-country" name="country">
+                      <option value="" data-i18n="rsvp.country.choose">Please choose</option>
+                      <option value="ES" data-i18n="rsvp.country.es">Spain</option>
+                      <option value="UA" data-i18n="rsvp.country.ua">Ukraine</option>
+                      <option value="LT" data-i18n="rsvp.country.lt">Lithuania</option>
+                      <option value="OTHER" data-i18n="rsvp.country.other">Another country</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form__companions" data-companions></div>
+
+                <div class="field">
+                  <label class="field__label" for="rsvp-dietary" data-i18n="rsvp.dietary.label">Dietary requirements or allergies</label>
+                  <textarea class="field__input" id="rsvp-dietary" name="dietary" rows="2" maxlength="1000" data-i18n-attr="placeholder:rsvp.dietary.placeholder"></textarea>
+                </div>
+
+                <fieldset class="field">
+                  <legend class="field__label" data-i18n="rsvp.extras.legend">Can we help with anything?</legend>
+                  <label class="check">
+                    <input type="checkbox" name="needs_accommodation">
+                    <span class="check__mark" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>
+                    <span data-i18n="rsvp.extras.accommodation">I would like help finding accommodation</span>
+                  </label>
+                  <label class="check">
+                    <input type="checkbox" name="wants_shuttle">
+                    <span class="check__mark" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>
+                    <span data-i18n="rsvp.extras.shuttle">I am interested in a shuttle</span>
+                  </label>
+                </fieldset>
+
+                <div class="field">
+                  <label class="field__label" for="rsvp-song" data-i18n="rsvp.song.label">A song that will get you on the dance floor</label>
+                  <input class="field__input" id="rsvp-song" name="song" type="text" maxlength="200" data-i18n-attr="placeholder:rsvp.song.placeholder">
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="rsvp-note">
+                  <span data-i18n="rsvp.note.label">A note for the couple</span>
+                  <span class="field__hint" data-i18n="rsvp.optional">optional</span>
+                </label>
+                <textarea class="field__input" id="rsvp-note" name="note" rows="3" maxlength="2000"></textarea>
+              </div>
+
+              <!-- Honeypot: real guests never see or fill this. -->
+              <div class="form__trap" aria-hidden="true">
+                <label for="rsvp-website">Website</label>
+                <input id="rsvp-website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+
+              <p class="form__alert" role="alert" data-rsvp-alert></p>
+              <button class="btn form__submit" type="submit" data-rsvp-submit data-i18n="rsvp.submit">Send response</button>
+            </form>
+
+            <div class="rsvp__success" data-rsvp-success hidden>
+              <svg class="rsvp__tick" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+                <path class="rsvp__tick-frame" d="M32 4 60 32 32 60 4 32Z"/>
+                <path class="rsvp__tick-mark" d="M21 33l8 8 15-17"/>
+              </svg>
+              <h3 class="rsvp__success-title" tabindex="-1" data-rsvp-success-title></h3>
+              <p class="rsvp__success-text" data-rsvp-success-text></p>
+              <button class="btn btn--ghost" type="button" data-rsvp-again data-i18n="rsvp.success.again">Send another response</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- @@sections -->
   </main>
 

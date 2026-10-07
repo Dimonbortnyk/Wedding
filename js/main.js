@@ -454,6 +454,159 @@ renderers.push(() => {
     .join('');
 });
 
+/* ───────────────────────────── RSVP ───────────────────────────── */
+
+const rsvpForm = () => $('[data-rsvp-form]');
+const isDeclined = () => rsvpForm().elements.attending.value === 'no';
+
+// One name field per companion; existing values survive a change of guest count or language.
+function syncCompanions() {
+  const form = rsvpForm();
+  const host = $('[data-companions]');
+  const count = Number(form.elements.guests_count.value) || 1;
+  const previous = $$('input', host).map((input) => input.value);
+
+  host.innerHTML = Array.from({ length: count - 1 }, (_, i) => {
+    const n = i + 2;
+    return `
+      <div class="field">
+        <label class="field__label" for="rsvp-companion-${n}">${esc(t('rsvp.companion.label', { n }))}</label>
+        <input class="field__input" id="rsvp-companion-${n}" name="companion_${n}" type="text" maxlength="200"
+               value="${esc(previous[i] ?? '')}" aria-describedby="rsvp-companion-${n}-error">
+        <p class="field__error" id="rsvp-companion-${n}-error" data-error-for="companion_${n}"></p>
+      </div>`;
+  }).join('');
+}
+
+function syncAttendance() {
+  $$('[data-attending-only]').forEach((node) => {
+    node.hidden = isDeclined();
+  });
+}
+
+function setFieldError(name, message) {
+  const form = rsvpForm();
+  const control = form.elements[name];
+  const controls = control instanceof RadioNodeList ? [...control] : [control];
+  controls.forEach((node) => node.toggleAttribute('aria-invalid', Boolean(message)));
+  $(`[data-error-for="${name}"]`, form).textContent = message || '';
+}
+
+function validateRsvp() {
+  const form = rsvpForm();
+  const errors = {};
+  const value = (name) => form.elements[name].value.trim();
+
+  if (!value('full_name')) errors.full_name = t('rsvp.errors.name');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value('email'))) errors.email = t('rsvp.errors.email');
+  if (!form.elements.attending.value) errors.attending = t('rsvp.errors.attending');
+  if (!isDeclined()) {
+    $$('[data-companions] input', form).forEach((input) => {
+      if (!input.value.trim()) errors[input.name] = t('rsvp.errors.companion');
+    });
+  }
+  return errors;
+}
+
+function readRsvp() {
+  const form = rsvpForm();
+  const value = (name) => form.elements[name].value.trim();
+  const attending = !isDeclined();
+  return {
+    full_name: value('full_name'),
+    email: value('email'),
+    phone: value('phone'),
+    attending,
+    guests_count: attending ? Number(form.elements.guests_count.value) : 0,
+    companions: attending ? $$('[data-companions] input', form).map((input) => input.value.trim()) : [],
+    dietary: attending ? value('dietary') : '',
+    country: attending ? form.elements.country.value : '',
+    needs_accommodation: attending && form.elements.needs_accommodation.checked,
+    wants_shuttle: attending && form.elements.wants_shuttle.checked,
+    song: attending ? value('song') : '',
+    note: value('note'),
+    language: getLanguage(),
+  };
+}
+
+renderers.push(() => {
+  $('[data-rsvp-deadline]').textContent = t('rsvp.deadline', { date: formatDate(CONFIG.rsvp.deadline) });
+
+  const guests = $('[data-guests]');
+  if (!guests.options.length) {
+    guests.innerHTML = Array.from({ length: CONFIG.rsvp.maxGuests }, (_, i) => `<option>${i + 1}</option>`).join('');
+  }
+  syncCompanions();
+});
+
+setups.push(() => {
+  const form = rsvpForm();
+  const submit = $('[data-rsvp-submit]');
+  const alert = $('[data-rsvp-alert]');
+  const success = $('[data-rsvp-success]');
+
+  form.addEventListener('change', (event) => {
+    if (event.target.name === 'attending') syncAttendance();
+    if (event.target.name === 'guests_count') syncCompanions();
+  });
+
+  // Clear a field's error as soon as the guest starts fixing it.
+  const clearError = (event) => {
+    if (event.target.name && $(`[data-error-for="${event.target.name}"]`, form)) setFieldError(event.target.name, '');
+  };
+  form.addEventListener('input', clearError);
+  form.addEventListener('change', clearError);
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    alert.textContent = '';
+
+    $$('[data-error-for]', form).forEach((node) => setFieldError(node.dataset.errorFor, ''));
+    const errors = validateRsvp();
+    Object.entries(errors).forEach(([name, message]) => setFieldError(name, message));
+    const firstInvalid = $('[aria-invalid]', form);
+    if (firstInvalid) {
+      firstInvalid.focus();
+      return;
+    }
+
+    if (form.elements.website.value) return; // honeypot filled: quietly drop the bot
+
+    const data = readRsvp();
+    submit.disabled = true;
+    submit.textContent = t('rsvp.sending');
+    try {
+      const { submitRsvp } = await import('./rsvp.js');
+      await submitRsvp(data);
+    } catch (error) {
+      console.error('[RSVP] submission failed', error);
+      alert.textContent = t('rsvp.errors.failed', { email: CONFIG.contact.email });
+      return;
+    } finally {
+      submit.disabled = false;
+      submit.textContent = t('rsvp.submit');
+    }
+
+    const name = data.full_name.split(/\s+/)[0];
+    const kind = data.attending ? 'accept' : 'decline';
+    $('[data-rsvp-success-title]').textContent = t(`rsvp.success.${kind}Title`, { name });
+    $('[data-rsvp-success-text]').textContent = t(`rsvp.success.${kind}Text`);
+    form.hidden = true;
+    success.hidden = false;
+    $('[data-rsvp-success-title]').focus({ preventScroll: true });
+    success.scrollIntoView({ block: 'center', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+  });
+
+  $('[data-rsvp-again]').addEventListener('click', () => {
+    form.reset();
+    syncAttendance();
+    syncCompanions();
+    success.hidden = true;
+    form.hidden = false;
+    form.elements.full_name.focus();
+  });
+});
+
 /* @@features */
 
 /* ───────────────────────────── Boot ───────────────────────────── */
