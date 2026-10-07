@@ -247,8 +247,66 @@
       </div>
     </section>
 
+    <section class="section" id="gallery">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="label" data-i18n="gallery.label">Moments</p>
+          <h2 class="title" data-i18n="gallery.title">Gallery</h2>
+        </header>
+        <!-- Built from CONFIG.gallery -->
+        <ul class="gallery" data-gallery></ul>
+      </div>
+    </section>
+
+    <section class="section section--linen" id="travel">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="label" data-i18n="travel.label">Getting there</p>
+          <h2 class="title" data-i18n="travel.title">Travel &amp; Stay</h2>
+          <p class="lead" data-i18n="travel.intro">Babtyno dvaras is a manor estate in Babtai, about 24 km north of Kaunas.</p>
+        </header>
+
+        <article class="card venue reveal">
+          <div class="venue__media" data-venue-media></div>
+          <div class="venue__body">
+            <p class="label" data-i18n="travel.venue.label">The venue</p>
+            <h3 class="venue__name" data-config="venue.name">Babtyno dvaras</h3>
+            <address class="venue__address">
+              <span data-config="venue.address">TBC — street address to be confirmed</span><br>
+              <span data-config="venue.town">Babtai, Kaunas District</span>, <span data-i18n="travel.venue.country">Lithuania</span>
+            </address>
+            <a class="btn btn--ghost" data-venue-map target="_blank" rel="noopener">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>
+              <span data-i18n="travel.venue.mapLink">Open in Google Maps</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Airports from CONFIG.travel, then the stay and shuttle placeholders -->
+        <ul class="travel-cards" data-travel-cards></ul>
+        <p class="travel__approx reveal" data-i18n="travel.approx">Drive times are approximate — please check before you travel.</p>
+
+        <h3 class="subhead reveal" data-i18n="travel.tipsTitle">Good to know</h3>
+        <ul class="tips" data-tips></ul>
+      </div>
+    </section>
+
     <!-- @@sections -->
   </main>
+
+  <dialog class="lightbox" data-lightbox data-i18n-attr="aria-label:gallery.title">
+    <button class="lightbox__btn lightbox__close" type="button" data-lightbox-close data-i18n-attr="aria-label:gallery.close">
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"/></svg>
+    </button>
+    <button class="lightbox__btn lightbox__prev" type="button" data-lightbox-prev data-i18n-attr="aria-label:gallery.prev">
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-prev"/></svg>
+    </button>
+    <figure class="photo photo--dark lightbox__photo" data-lightbox-photo><img alt="" data-lightbox-img></figure>
+    <button class="lightbox__btn lightbox__next" type="button" data-lightbox-next data-i18n-attr="aria-label:gallery.next">
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-next"/></svg>
+    </button>
+    <p class="lightbox__count" aria-live="polite" data-lightbox-count></p>
+  </dialog>
 
   <!-- @@footer -->
 

@@ -329,6 +329,131 @@ renderers.push(() => {
     .join('');
 });
 
+/* ───────────────────────────── Gallery & lightbox ───────────────────────────── */
+
+function galleryAlt(index) {
+  const custom = t('gallery.alts');
+  return (Array.isArray(custom) && custom[index]) || t('gallery.alt', { n: index + 1 });
+}
+
+renderers.push(() => {
+  const total = CONFIG.gallery.length;
+  $('[data-gallery]').innerHTML = CONFIG.gallery
+    .map(
+      (file, index) => `
+        <li class="reveal" style="--delay: ${(index % 4) * 0.08}s">
+          <a class="photo gallery__item" href="assets/photos/${esc(file)}" data-photo="${esc(file)}" data-index="${index}"
+             aria-label="${esc(t('gallery.open', { n: index + 1, total }))}">
+            <img src="assets/photos/${esc(file)}" alt="${esc(galleryAlt(index))}" loading="lazy" decoding="async">
+          </a>
+        </li>`,
+    )
+    .join('');
+});
+
+setups.push(() => {
+  const dialog = $('[data-lightbox]');
+  const frame = $('[data-lightbox-photo]');
+  const img = $('[data-lightbox-img]');
+  const total = CONFIG.gallery.length;
+  let current = 0;
+
+  function show(index) {
+    current = (index + total) % total;
+    const file = CONFIG.gallery[current];
+    frame.classList.remove('is-missing');
+    frame.dataset.photo = file;
+    img.alt = galleryAlt(current);
+    img.src = `assets/photos/${file}`;
+    $('[data-lightbox-count]').textContent = t('gallery.count', { n: current + 1, total });
+  }
+
+  $('[data-gallery]').addEventListener('click', (event) => {
+    const item = event.target.closest('[data-index]');
+    if (!item || typeof dialog.showModal !== 'function') return; // no <dialog>: the link opens the photo
+    event.preventDefault();
+    show(Number(item.dataset.index));
+    dialog.showModal();
+  });
+
+  $('[data-lightbox-close]').addEventListener('click', () => dialog.close());
+  $('[data-lightbox-prev]').addEventListener('click', () => show(current - 1));
+  $('[data-lightbox-next]').addEventListener('click', () => show(current + 1));
+
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close(); // a click on the backdrop
+  });
+  dialog.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') show(current - 1);
+    if (event.key === 'ArrowRight') show(current + 1);
+  });
+
+  let touchStartX = null;
+  dialog.addEventListener('touchstart', (event) => {
+    touchStartX = event.changedTouches[0].clientX;
+  }, { passive: true });
+  dialog.addEventListener('touchend', (event) => {
+    if (touchStartX === null) return;
+    const dx = event.changedTouches[0].clientX - touchStartX;
+    touchStartX = null;
+    if (Math.abs(dx) > 48) show(current + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+});
+
+/* ───────────────────────────── Travel ───────────────────────────── */
+
+function formatDrive(minutes) {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  const parts = [];
+  if (h) parts.push(`${h} ${t('travel.hourShort')}`);
+  if (m) parts.push(`${m} ${t('travel.minuteShort')}`);
+  return t('travel.drive', { time: parts.join(' ') });
+}
+
+renderers.push(() => {
+  const { venue, travel } = CONFIG;
+
+  $('[data-venue-map]').href = venue.mapUrl;
+  $('[data-venue-media]').innerHTML = venue.mapEmbedUrl
+    ? `<iframe class="venue__map" src="${esc(venue.mapEmbedUrl)}" title="${esc(t('travel.venue.mapTitle'))}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
+    : photo('venue.jpg', t('travel.venue.alt'), 'venue__photo');
+
+  const airports = travel.airports.map(
+    (airport) => `
+      <li class="card card--lift travel-card reveal">
+        ${icon('plane', 'icon travel-card__icon')}
+        <p class="travel-card__code">${esc(airport.code)}</p>
+        <h3 class="travel-card__title">${esc(t(`travel.airports.${airport.id}.name`))}</h3>
+        <p class="travel-card__meta">${esc(formatDrive(airport.driveMinutes))}</p>
+        <p class="travel-card__text">${esc(t(`travel.airports.${airport.id}.text`))}</p>
+      </li>`,
+  );
+  const placeholders = [
+    ['stay', 'bed'],
+    ['shuttle', 'bus'],
+  ].map(
+    ([id, iconName]) => `
+      <li class="card card--lift travel-card reveal">
+        ${icon(iconName, 'icon travel-card__icon')}
+        <h3 class="travel-card__title">${esc(t(`travel.${id}.title`))}</h3>
+        <p class="travel-card__meta">${esc(t('travel.soon'))}</p>
+        <p class="travel-card__text">${esc(t(`travel.${id}.text`))}</p>
+      </li>`,
+  );
+  $('[data-travel-cards]').innerHTML = [...airports, ...placeholders].join('');
+
+  $('[data-tips]').innerHTML = ['currency', 'weather', 'language', 'timezone']
+    .map(
+      (id, index) => `
+        <li class="tip reveal" style="--delay: ${index * 0.08}s">
+          <h4 class="tip__title">${esc(t(`travel.tips.${id}.title`))}</h4>
+          <p class="tip__text">${esc(t(`travel.tips.${id}.text`))}</p>
+        </li>`,
+    )
+    .join('');
+});
+
 /* @@features */
 
 /* ───────────────────────────── Boot ───────────────────────────── */

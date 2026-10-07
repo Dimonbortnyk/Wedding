@@ -212,6 +212,69 @@ const en = {
       keptaDuona: { name: 'Kepta duona', desc: 'Fried garlic rye bread with a warm cheese sauce' },
     },
   },
+  gallery: {
+    label: 'Moments',
+    title: 'Gallery',
+    // Used for every photo unless `alts` has a description at that position.
+    alt: 'Ugne and Dimon — photo {n}',
+    alts: [],
+    open: 'Open photo {n} of {total}',
+    count: '{n} / {total}',
+    close: 'Close gallery',
+    prev: 'Previous photo',
+    next: 'Next photo',
+  },
+  travel: {
+    label: 'Getting there',
+    title: 'Travel & Stay',
+    intro: 'Babtyno dvaras is a manor estate in Babtai, about 24 km north of Kaunas, in the heart of Lithuania.',
+    approx: 'Drive times are approximate — please check before you travel.',
+    drive: 'about {time} by car',
+    hourShort: 'h',
+    minuteShort: 'min',
+    soon: 'Coming soon',
+    tipsTitle: 'Good to know',
+    venue: {
+      label: 'The venue',
+      country: 'Lithuania',
+      mapLink: 'Open in Google Maps',
+      mapTitle: 'Map of Babtyno dvaras',
+      alt: 'Babtyno dvaras manor',
+    },
+    airports: {
+      kun: {
+        name: 'Kaunas Airport',
+        text: 'The closest airport, with direct flights from a number of European cities.',
+      },
+      vno: {
+        name: 'Vilnius Airport',
+        text: 'The capital’s airport, with the widest choice of flights. Trains and coaches link Vilnius and Kaunas.',
+      },
+    },
+    stay: {
+      title: 'Where to stay',
+      text: 'We are putting together a list of hotels and guesthouses in and around Kaunas, for every budget.',
+    },
+    shuttle: {
+      title: 'Shuttle',
+      text: 'We are looking into a shuttle between Kaunas and the venue. Tell us in the RSVP if you would use it.',
+    },
+    tips: {
+      currency: { title: 'Currency', text: 'Lithuania uses the euro. Cards are accepted almost everywhere.' },
+      weather: {
+        title: 'August weather',
+        text: 'Usually warm, with highs in the low twenties (°C), cooler evenings and the odd summer shower. Bring a light layer.',
+      },
+      language: {
+        title: 'Language',
+        text: 'Lithuanian is the local language, and English is widely spoken. “Ačiū” means thank you.',
+      },
+      timezone: {
+        title: 'Time zone',
+        text: 'Eastern European Summer Time (UTC+3): one hour ahead of Spain, the same as Ukraine.',
+      },
+    },
+  },
   /* @@en */
 };
 
