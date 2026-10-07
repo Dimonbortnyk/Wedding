@@ -76,6 +76,96 @@ function observeReveals(root = document) {
   });
 }
 
+/* ───────────────────────────── Scroll bus ───────────────────────────── */
+
+// One passive scroll/resize listener for everything, throttled to animation frames.
+const scrollTasks = [];
+let scrollQueued = false;
+
+function runScrollTasks() {
+  scrollQueued = false;
+  scrollTasks.forEach((fn) => fn(window.scrollY));
+}
+
+function queueScrollTasks() {
+  if (scrollQueued) return;
+  scrollQueued = true;
+  requestAnimationFrame(runScrollTasks);
+}
+
+setups.push(() => {
+  window.addEventListener('scroll', queueScrollTasks, { passive: true });
+  window.addEventListener('resize', queueScrollTasks, { passive: true });
+  runScrollTasks();
+});
+
+/* ───────────────────────────── Config bindings ───────────────────────────── */
+
+// <span data-config="couple.first"> takes its text straight from config.js.
+renderers.push(() => {
+  $$('[data-config]').forEach((node) => {
+    const value = node.dataset.config.split('.').reduce((obj, key) => obj?.[key], CONFIG);
+    if (value != null) node.textContent = value;
+  });
+});
+
+/* ───────────────────────────── Nav & language ───────────────────────────── */
+
+renderers.push(() => {
+  const host = $('[data-lang-switcher]');
+  if (!host.children.length) {
+    host.innerHTML = LANGUAGES.map(
+      (l) =>
+        `<button type="button" class="lang__btn" data-lang="${l.code}" lang="${l.code}">${l.label}<span class="sr-only"> — ${esc(l.name)}</span></button>`,
+    ).join('');
+  }
+  $$('[data-lang]', host).forEach((btn) => {
+    btn.setAttribute('aria-pressed', String(btn.dataset.lang === getLanguage()));
+  });
+});
+
+const isNavOpen = () => document.body.classList.contains('nav-open');
+
+function setNavOpen(open) {
+  const toggle = $('[data-nav-toggle]');
+  document.body.classList.toggle('nav-open', open);
+  toggle.setAttribute('aria-expanded', String(open));
+  toggle.setAttribute('aria-label', t(open ? 'a11y.closeMenu' : 'a11y.openMenu'));
+}
+
+renderers.push(() => setNavOpen(isNavOpen()));
+
+setups.push(() => {
+  $('[data-lang-switcher]').addEventListener('click', (event) => {
+    const btn = event.target.closest('[data-lang]');
+    if (btn) setLanguage(btn.dataset.lang);
+  });
+
+  $('[data-nav-toggle]').addEventListener('click', () => setNavOpen(!isNavOpen()));
+  $('#site-nav').addEventListener('click', (event) => {
+    if (event.target.closest('a')) setNavOpen(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && isNavOpen()) {
+      setNavOpen(false);
+      $('[data-nav-toggle]').focus();
+    }
+  });
+  // Leaving the mobile layout with the menu open would otherwise keep the page scroll-locked.
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', (mq) => {
+    if (mq.matches) setNavOpen(false);
+  });
+
+  const header = $('[data-header]');
+  const heroMedia = $('[data-parallax]');
+  scrollTasks.push((y) => {
+    header.classList.toggle('is-scrolled', y > 24);
+    if (heroMedia && !reducedMotion.matches && y <= window.innerHeight) {
+      heroMedia.style.transform = `translate3d(0, ${(y * 0.22).toFixed(1)}px, 0)`;
+    }
+  });
+});
+
 /* @@features */
 
 /* ───────────────────────────── Boot ───────────────────────────── */

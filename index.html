@@ -67,9 +67,56 @@
     <symbol id="i-bus" viewBox="0 0 24 24"><path d="M5 4h14a1 1 0 0 1 1 1v12H4V5a1 1 0 0 1 1-1zM4 11h16M7 17v2.5M17 17v2.5M7.5 14h.01M16.5 14h.01"/></symbol>
   </svg>
 
-  <!-- @@header -->
+  <header class="site-header" data-header>
+    <div class="site-header__inner">
+      <a class="monogram" href="#top" data-i18n-attr="aria-label:a11y.home" data-config="couple.monogram">U &amp; D</a>
+
+      <nav class="site-nav" id="site-nav" data-i18n-attr="aria-label:a11y.mainNav">
+        <ul class="site-nav__list">
+          <li><a href="#story" data-i18n="nav.story">Our Story</a></li>
+          <li><a href="#day" data-i18n="nav.day">The Day</a></li>
+          <li><a href="#menu" data-i18n="nav.menu">Menu</a></li>
+          <li><a href="#travel" data-i18n="nav.travel">Travel</a></li>
+          <li><a href="#rsvp" data-i18n="nav.rsvp">RSVP</a></li>
+          <li><a href="#gifts" data-i18n="nav.gifts">Gifts</a></li>
+        </ul>
+      </nav>
+
+      <div class="lang" role="group" data-i18n-attr="aria-label:a11y.language" data-lang-switcher></div>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
 
   <main id="main">
+    <section class="hero" id="top">
+      <figure class="photo photo--dark photo--bg hero__media" data-photo="hero.jpg" data-parallax>
+        <img src="assets/photos/hero.jpg" alt="" fetchpriority="high" data-i18n-attr="alt:hero.alt">
+      </figure>
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="label label--light hero__rise" data-i18n="hero.eyebrow">Together with their families</p>
+        <h1 class="hero__names hero__rise">
+          <span data-config="couple.first">Ugne</span>
+          <span class="hero__amp" aria-hidden="true">&amp;</span><span class="sr-only" data-i18n="hero.and">and</span>
+          <span data-config="couple.second">Dimon</span>
+        </h1>
+        <p class="hero__date hero__rise">
+          <span class="hero__day" data-i18n="hero.day">Seventh of August</span>
+          <span class="hero__year" data-i18n="hero.year">Two Thousand Twenty Seven</span>
+        </p>
+        <svg class="ornament ornament--light hero__rise" viewBox="0 0 240 24" aria-hidden="true" focusable="false"><use href="#i-ornament"/></svg>
+        <p class="hero__place hero__rise" data-i18n="hero.place">Babtyno dvaras • Kaunas, Lithuania</p>
+      </div>
+
+      <a class="hero__scroll" href="#story">
+        <span class="sr-only" data-i18n="hero.scroll">Scroll to our story</span>
+      </a>
+    </section>
+
     <!-- @@sections -->
   </main>
 

@@ -34,6 +34,23 @@ const en = {
     mainNav: 'Main navigation',
     photoPending: 'Photo coming soon',
   },
+  nav: {
+    story: 'Our Story',
+    day: 'The Day',
+    menu: 'Menu',
+    travel: 'Travel',
+    rsvp: 'RSVP',
+    gifts: 'Gifts',
+  },
+  hero: {
+    alt: 'Ugne and Dimon',
+    eyebrow: 'Together with their families',
+    and: 'and',
+    day: 'Seventh of August',
+    year: 'Two Thousand Twenty Seven',
+    place: 'Babtyno dvaras • Kaunas, Lithuania',
+    scroll: 'Scroll to our story',
+  },
   /* @@en */
 };
 
