@@ -1,0 +1,9 @@
+<!-- Section divider: Ukrainian embroidery diamonds either side of a Lithuanian sun.
+     Standalone copy of the #i-ornament symbol in index.html, for print or social use. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 24" fill="none" stroke="#B8935A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M0 12h62M178 12h62"/>
+  <path d="M70 12l4-4 4 4-4 4zM162 12l4-4 4 4-4 4z"/>
+  <path d="M94 2l10 10-10 10-10-10zM94 7l5 5-5 5-5-5zM146 2l10 10-10 10-10-10zM146 7l5 5-5 5-5-5z"/>
+  <circle cx="120" cy="12" r="3.5"/>
+  <path d="M120 5.5V1M120 18.5V23M113.5 12H109M126.5 12H131M115.4 7.4l-2.5-2.5M124.6 7.4l2.5-2.5M115.4 16.6l-2.5 2.5M124.6 16.6l2.5 2.5"/>
+</svg>
