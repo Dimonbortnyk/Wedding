@@ -166,6 +166,29 @@ setups.push(() => {
   });
 });
 
+/* ───────────────────────────── Our Story ───────────────────────────── */
+
+renderers.push(() => {
+  $('[data-story]').innerHTML = CONFIG.story
+    .map((item, index) => {
+      const base = `story.items.${item.id}`;
+      const flip = index % 2 === 1;
+      return `
+        <li class="story__item${flip ? ' story__item--flip' : ''}">
+          <div class="story__media reveal ${flip ? 'reveal--right' : 'reveal--left'}">
+            ${photo(item.photo, t(`${base}.alt`), 'story__photo')}
+            <span class="story__tag" aria-hidden="true">${item.date.slice(0, 4)}</span>
+          </div>
+          <div class="story__text reveal ${flip ? 'reveal--left' : 'reveal--right'}">
+            <p class="label"><time datetime="${item.date}">${esc(formatDate(item.date))}</time> — ${esc(t(`${base}.place`))}</p>
+            <h3 class="story__title">${esc(t(`${base}.title`))}</h3>
+            <p>${esc(t(`${base}.text`))}</p>
+          </div>
+        </li>`;
+    })
+    .join('');
+});
+
 /* @@features */
 
 /* ───────────────────────────── Boot ───────────────────────────── */

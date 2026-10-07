@@ -51,6 +51,55 @@ const en = {
     place: 'Babtyno dvaras • Kaunas, Lithuania',
     scroll: 'Scroll to our story',
   },
+  story: {
+    label: 'How it all began',
+    title: 'Our Story',
+    quote: 'We said “I love you” in every language we knew — and it meant the same in each one.',
+    items: {
+      barcelona: {
+        place: 'Barcelona',
+        title: 'A walk, a recipe, a kiss',
+        text: 'Their love story began beneath the Arc de Triomf in Barcelona. They ended up getting lost through the streets of El Born, talking about their favourite recipes and food, until Dimon stole a kiss from Ugne — the start of a magical night full of spontaneity.',
+        alt: 'Ugne and Dimon in Barcelona',
+      },
+      bologna: {
+        place: 'Bologna, Italy',
+        title: 'In every language',
+        text: 'They travelled together to Bologna for two nights full of adventure, with a hint of love and romance already in the air. At the Torre dell’Orologio, with nobody else around, they said “I love you” in every language they could.',
+        alt: 'Ugne and Dimon in Bologna',
+      },
+      trakai: {
+        place: 'Trakai, Lithuania',
+        title: 'The question by the lake',
+        text: 'They travelled to Lithuania to celebrate the birthday of Ingrida, Ugne’s mother — a very special celebration, but there were other plans too, this time for Ugne. The weather in Trakai was beautiful; Dimon was very nervous, but beside a stunning lake he finally asked Ugne to marry him.',
+        alt: 'Ugne and Dimon by the lake in Trakai',
+      },
+      forever: {
+        place: 'Kaunas',
+        title: 'Forever begins',
+        text: 'Forever begins at Babtyno dvaras, surrounded by family and friends from every corner of Europe.',
+        alt: 'Ugne and Dimon',
+      },
+    },
+  },
+  cultures: {
+    label: 'Lithuania • Ukraine • Barcelona',
+    title: 'Two Cultures, One Table',
+    intro:
+      'Lithuania and Ukraine greet newlyweds in the same way: with bread and salt, so that their home is never without either. Our day weaves the two traditions together — and raises a glass to Barcelona, where it all began.',
+    lt: {
+      title: 'Rye bread & straw gardens',
+      text: 'Dark rye bread and salt at the door, offered by the parents. Above the table, the “sodas” — a garden woven from straw that brings harmony to a home, and the shape behind the ornaments on this site. For dessert, a towering šakotis.',
+    },
+    ua: {
+      title: 'Rushnyk & korovai',
+      text: 'A rushnyk — an embroidered cloth that carries a family’s blessing — and the korovai, a wedding bread crowned with dough birds and ears of wheat, shared with every guest for good fortune.',
+    },
+    bcn: {
+      title: 'A toast of cava',
+      text: 'A first walk through El Born became a first kiss. We toast it with cava from the hills outside the city — and the little flower from Barcelona’s pavements is hiding in our ornaments too.',
+    },
+  },
   /* @@en */
 };
 

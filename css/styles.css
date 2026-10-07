@@ -784,4 +784,190 @@ button {
   }
 }
 
+.hero__media.is-missing::after {
+  /* The figure is taller than the hero (parallax room), so lift the filename back into view. */
+  bottom: calc(18% + 1rem);
+}
+
+@media (max-width: 479.98px) {
+  .hero__day,
+  .hero__place {
+    font-size: 0.75rem;
+    letter-spacing: 0.24em;
+  }
+}
+
+/* Our Story */
+
+.story {
+  display: grid;
+  gap: clamp(3.5rem, 9vw, 7rem);
+}
+
+.story__item {
+  display: grid;
+  gap: 2.25rem;
+  align-items: center;
+}
+
+.story__media {
+  position: relative;
+  width: min(100%, 26rem);
+  margin-inline: auto;
+}
+
+/* Offset gold frame behind the photo. */
+.story__media::before {
+  content: '';
+  position: absolute;
+  inset: 0.875rem -0.875rem -0.875rem 0.875rem;
+  border: var(--line);
+}
+
+.story__photo {
+  aspect-ratio: 4 / 5;
+  box-shadow: var(--shadow-md);
+}
+
+.story__tag {
+  position: absolute;
+  top: 1.5rem;
+  left: -0.75rem;
+  padding: 0.35rem 1rem 0.4rem;
+  background: var(--ivory);
+  box-shadow: var(--shadow-sm);
+  color: var(--gold-ink);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+.story__text {
+  max-width: 30rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.story__title {
+  margin-block: 0.75rem 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.story__text p:last-child {
+  color: var(--muted-ink);
+}
+
+@media (min-width: 860px) {
+  .story {
+    position: relative;
+  }
+
+  /* A thin thread down the middle, joining the four moments. */
+  .story::before {
+    content: '';
+    position: absolute;
+    inset: 2rem auto 2rem 50%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(184, 147, 90, 0.45) 8%, rgba(184, 147, 90, 0.45) 92%, transparent);
+  }
+
+  .story__item {
+    position: relative;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(4rem, 10vw, 9rem);
+  }
+
+  .story__item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 1px solid var(--gold);
+    background: var(--ivory);
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .story__media {
+    margin-inline: auto 0;
+  }
+
+  .story__text {
+    margin-inline: 0 auto;
+    text-align: left;
+  }
+
+  .story__item--flip .story__media {
+    order: 2;
+    margin-inline: 0 auto;
+  }
+
+  .story__item--flip .story__text {
+    margin-inline: auto 0;
+    text-align: right;
+  }
+
+  .story__item--flip .story__tag {
+    right: -0.75rem;
+    left: auto;
+  }
+}
+
+/* Two Cultures, One Table */
+
+.cultures {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.culture {
+  padding: clamp(2rem, 4vw, 2.75rem) clamp(1.5rem, 3vw, 2.25rem);
+  text-align: center;
+}
+
+.culture__motif {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0 auto 1.5rem;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  transition: transform 0.9s var(--ease);
+}
+
+@media (hover: hover) {
+  .culture:hover .culture__motif {
+    transform: rotate(90deg);
+  }
+}
+
+.culture__title {
+  margin-block: 0.5rem 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.culture__text {
+  color: var(--muted-ink);
+  font-size: 1rem;
+}
+
+.cultures + .ornament {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+@media (min-width: 860px) {
+  .cultures {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /* @@css */
