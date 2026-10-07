@@ -293,6 +293,42 @@ function updateJourney() {
 
 setups.push(() => scrollTasks.push(updateJourney));
 
+/* ───────────────────────────── Menu ───────────────────────────── */
+
+const dietTag = (tag) =>
+  `<span class="tag" title="${esc(t(`menu.tags.${tag}`))}"><span aria-hidden="true">${tag}</span><span class="sr-only">${esc(t(`menu.tags.${tag}`))}</span></span>`;
+
+renderers.push(() => {
+  $('[data-menu-sample]').hidden = !CONFIG.menu.isSample;
+
+  $('[data-menu]').innerHTML = CONFIG.menu.courses
+    .map((course) => {
+      const note = t(`menu.courses.${course.id}.note`);
+      const dishes = course.items
+        .map((item) => {
+          const base = `menu.items.${item.id}`;
+          const desc = t(`${base}.desc`);
+          return `
+            <li class="dish">
+              <p class="dish__name">${esc(t(`${base}.name`))}${item.tags.length ? ` <span class="dish__tags">${item.tags.map(dietTag).join('')}</span>` : ''}</p>
+              ${desc === `${base}.desc` ? '' : `<p class="dish__desc">${esc(desc)}</p>`}
+            </li>`;
+        })
+        .join('');
+      return `
+        <section class="menu-course">
+          <h3 class="menu-course__title">${esc(t(`menu.courses.${course.id}.title`))}</h3>
+          ${note === `menu.courses.${course.id}.note` ? '' : `<p class="menu-course__note">${esc(note)}</p>`}
+          <ul class="menu-course__dishes">${dishes}</ul>
+        </section>`;
+    })
+    .join('');
+
+  $('[data-menu-legend]').innerHTML = ['V', 'VG', 'GF']
+    .map((tag) => `<li><span class="tag" aria-hidden="true">${tag}</span>${esc(t(`menu.tags.${tag}`))}</li>`)
+    .join('');
+});
+
 /* @@features */
 
 /* ───────────────────────────── Boot ───────────────────────────── */

@@ -1308,4 +1308,126 @@ button {
   }
 }
 
+/* Menu — a printed card */
+
+.menu-card {
+  position: relative;
+  padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 7vw, 5rem);
+  border: 1px solid var(--gold);
+  background: var(--ivory);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.menu-card::before {
+  content: '';
+  position: absolute;
+  inset: 0.5rem;
+  border: var(--line);
+  pointer-events: none;
+}
+
+.menu-card__sample {
+  margin-top: 0;
+}
+
+.menu-course {
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+.menu-course__title {
+  color: var(--gold-ink);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.menu-course__title::after {
+  content: '';
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0.9rem auto 0;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+}
+
+.menu-course__note {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+.menu-course__dishes {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.dish__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 3.2vw, 1.625rem);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.dish__desc {
+  margin-top: 0.15rem;
+  color: var(--muted-ink);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.dish__tags {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-left: 0.25rem;
+  vertical-align: 0.2em;
+}
+
+.tag {
+  display: inline-grid;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding-inline: 0.25rem;
+  place-items: center;
+  border: 1px solid var(--gold);
+  border-radius: 99px;
+  color: var(--gold-ink);
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.menu-card .ornament {
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+.menu-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1.75rem;
+  color: var(--muted-ink);
+  font-size: 0.875rem;
+}
+
+.menu-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menu-card__note {
+  max-width: 28rem;
+  margin: 1.25rem auto 0;
+  color: var(--muted-ink);
+  font-size: 0.9375rem;
+}
+
 /* @@css */
