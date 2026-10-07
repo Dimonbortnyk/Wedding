@@ -324,6 +324,67 @@ const en = {
       again: 'Send another response',
     },
   },
+  gifts: {
+    label: 'With gratitude',
+    title: 'Gifts & Contributions',
+    intro:
+      'Your presence is the greatest gift. If you’d like to contribute to our next chapter together, you can do so by bank transfer.',
+    note: 'No payment is taken on this site — these are simply our details for a bank transfer.',
+    fields: {
+      accountHolder: 'Account holder',
+      iban: 'IBAN',
+      bic: 'BIC / SWIFT',
+      bank: 'Bank',
+      reference: 'Reference',
+    },
+    copy: 'Copy',
+    copyLabel: 'Copy {field}',
+    copied: '{field} copied',
+    copyFailed: 'Could not copy — please select the text instead',
+  },
+  faq: {
+    label: 'Questions & answers',
+    title: 'Good to Know',
+    items: {
+      dress: {
+        q: 'What should I wear?',
+        a: 'Elegant summer attire. Part of the day is outdoors on grass, so block heels or wedges are kinder than stilettos, and a light layer is handy for the evening.',
+      },
+      plusOnes: {
+        q: 'Can I bring a plus-one?',
+        a: 'Your invitation will name everyone we are expecting. If you are not sure, just ask us.',
+      },
+      kids: {
+        q: 'Are children welcome?',
+        a: 'We are finalising the details and will update this page soon. If you are hoping to travel with little ones, mention it in your RSVP note.',
+      },
+      parking: {
+        q: 'Is there parking at the venue?',
+        a: 'We are confirming the parking arrangements with the venue and will post the details here.',
+      },
+      weather: {
+        q: 'What if it rains?',
+        a: 'August is usually warm and bright — but this is the Baltics. There is an indoor plan, so the celebration goes ahead whatever the sky decides.',
+      },
+      photos: {
+        q: 'Can I take photos?',
+        a: 'We would love an unplugged ceremony: phones and cameras away, so everyone is truly there with us. Our photographer will capture it all — and once the ceremony is over, snap away.',
+      },
+      language: {
+        q: 'What language will the ceremony be in?',
+        a: 'To be confirmed. With guests from Lithuania, Ukraine, Spain and beyond, we will make sure everyone can follow the moments that matter.',
+      },
+      contact: {
+        q: 'Who can I contact with a question?',
+        a: 'Write to us at {email} and one of us will get back to you.',
+      },
+    },
+  },
+  footer: {
+    date: 'August 7, 2027',
+    place: 'Kaunas, Lithuania',
+    made: 'Made with love for our forever',
+  },
   /* @@en */
 };
 

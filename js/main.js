@@ -607,6 +607,85 @@ setups.push(() => {
   });
 });
 
+/* ───────────────────────────── Gifts ───────────────────────────── */
+
+let toastTimer;
+
+function showToast(message) {
+  const toast = $('[data-toast]');
+  toast.textContent = message;
+  toast.classList.add('is-visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2600);
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    // Clipboard API is unavailable on plain http and file:// — fall back to a hidden field.
+    const field = Object.assign(document.createElement('textarea'), { value: text, readOnly: true });
+    field.style.cssText = 'position:fixed;opacity:0';
+    document.body.append(field);
+    field.select();
+    const ok = document.execCommand('copy');
+    field.remove();
+    return ok;
+  }
+}
+
+renderers.push(() => {
+  $('[data-gifts]').innerHTML = ['accountHolder', 'iban', 'bic', 'bank', 'reference']
+    .map((key) => {
+      const field = t(`gifts.fields.${key}`);
+      return `
+        <div class="gift-row">
+          <dt class="gift-row__label">${esc(field)}</dt>
+          <dd class="gift-row__value">${esc(CONFIG.gifts[key])}</dd>
+          <dd class="gift-row__action">
+            <button class="gift-row__copy" type="button" data-copy="${key}" aria-label="${esc(t('gifts.copyLabel', { field }))}">
+              ${icon('copy')}<span aria-hidden="true">${esc(t('gifts.copy'))}</span>
+            </button>
+          </dd>
+        </div>`;
+    })
+    .join('');
+});
+
+setups.push(() => {
+  $('[data-gifts]').addEventListener('click', async (event) => {
+    const btn = event.target.closest('[data-copy]');
+    if (!btn) return;
+    const key = btn.dataset.copy;
+    // Banks expect the IBAN without the spaces that make it readable on screen.
+    const value = key === 'iban' ? CONFIG.gifts.iban.replace(/\s+/g, '') : CONFIG.gifts[key];
+    const ok = await copyText(value);
+    showToast(ok ? t('gifts.copied', { field: t(`gifts.fields.${key}`) }) : t('gifts.copyFailed'));
+  });
+});
+
+/* ───────────────────────────── FAQ & footer ───────────────────────────── */
+
+renderers.push(() => {
+  const { email } = CONFIG.contact;
+  const mailto = `<a class="text-link" href="mailto:${esc(email)}">${esc(email)}</a>`;
+
+  $('[data-faq]').innerHTML = Object.keys(t('faq.items'))
+    .map(
+      (id) => `
+        <details class="faq__item">
+          <summary class="faq__q">${esc(t(`faq.items.${id}.q`))}${icon('chevron', 'icon faq__chevron')}</summary>
+          <p class="faq__a">${esc(t(`faq.items.${id}.a`)).replace('{email}', mailto)}</p>
+        </details>`,
+    )
+    .join('');
+
+  $$('[data-initial]').forEach((node) => {
+    node.textContent = CONFIG.couple[node.dataset.initial].charAt(0);
+  });
+});
+
 /* @@features */
 
 /* ───────────────────────────── Boot ───────────────────────────── */

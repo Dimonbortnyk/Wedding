@@ -432,7 +432,32 @@
       </div>
     </section>
 
-    <!-- @@sections -->
+    <section class="section section--linen" id="gifts">
+      <div class="container container--narrow">
+        <header class="section__head reveal">
+          <p class="label" data-i18n="gifts.label">With gratitude</p>
+          <h2 class="title" data-i18n="gifts.title">Gifts &amp; Contributions</h2>
+          <p class="lead" data-i18n="gifts.intro">Your presence is the greatest gift. If you’d like to contribute to our next chapter together, you can do so by bank transfer.</p>
+        </header>
+
+        <div class="card gift-card reveal">
+          <!-- Built from CONFIG.gifts -->
+          <dl class="gift-list" data-gifts></dl>
+          <p class="gift-card__note" data-i18n="gifts.note">No payment is taken on this site — these are simply our details for a bank transfer.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container container--narrow">
+        <header class="section__head reveal">
+          <p class="label" data-i18n="faq.label">Questions &amp; answers</p>
+          <h2 class="title" data-i18n="faq.title">Good to Know</h2>
+        </header>
+        <!-- Built from i18n faq.items -->
+        <div class="faq reveal" data-faq></div>
+      </div>
+    </section>
   </main>
 
   <dialog class="lightbox" data-lightbox data-i18n-attr="aria-label:gallery.title">
@@ -449,7 +474,20 @@
     <p class="lightbox__count" aria-live="polite" data-lightbox-count></p>
   </dialog>
 
-  <!-- @@footer -->
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+
+  <footer class="site-footer">
+    <p class="site-footer__monogram">
+      <span data-initial="first">U</span>
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-heart"/></svg>
+      <span class="sr-only" data-i18n="hero.and">and</span>
+      <span data-initial="second">D</span>
+    </p>
+    <p class="site-footer__date" data-i18n="footer.date">August 7, 2027</p>
+    <p class="label label--light" data-i18n="footer.place">Kaunas, Lithuania</p>
+    <svg class="ornament" viewBox="0 0 240 24" aria-hidden="true" focusable="false"><use href="#i-ornament"/></svg>
+    <p class="site-footer__made" data-i18n="footer.made">Made with love for our forever</p>
+  </footer>
 
   <noscript>
     <p class="noscript">This site needs JavaScript for the programme, menu and RSVP form. Please enable it, or write to us and we will send you everything by email.</p>
