@@ -163,6 +163,67 @@
       </div>
     </section>
 
+    <section class="countdown" id="countdown" aria-labelledby="countdown-title">
+      <figure class="photo photo--dark photo--bg" data-photo="countdown.jpg">
+        <img src="assets/photos/countdown.jpg" alt="" loading="lazy" decoding="async">
+      </figure>
+      <div class="countdown__overlay" aria-hidden="true"></div>
+
+      <div class="countdown__content reveal">
+        <p class="label label--light" data-i18n="countdown.label">Counting down to</p>
+        <h2 class="title" id="countdown-title" data-i18n="countdown.title">The Big Day</h2>
+        <svg class="icon countdown__heart" aria-hidden="true" focusable="false"><use href="#i-heart"/></svg>
+
+        <div class="countdown__grid" role="timer" data-countdown>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="days">–</span><span class="countdown__name" data-i18n="countdown.days">Days</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="hours">–</span><span class="countdown__name" data-i18n="countdown.hours">Hours</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="minutes">–</span><span class="countdown__name" data-i18n="countdown.minutes">Minutes</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="seconds">–</span><span class="countdown__name" data-i18n="countdown.seconds">Seconds</span></div>
+        </div>
+        <p class="countdown__done" data-countdown-done hidden></p>
+
+        <p class="countdown__date" data-i18n="countdown.date">August 7, 2027 • Kaunas, Lithuania</p>
+      </div>
+    </section>
+
+    <section class="section" id="day">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="label" data-i18n="programme.label">The celebration</p>
+          <h2 class="title" data-i18n="programme.title">The Day</h2>
+          <p class="lead" data-i18n="programme.intro">From the first hello to the last dance — here is how the day will unfold.</p>
+          <p class="notice" data-times-notice data-i18n="programme.tbc">Times to be confirmed</p>
+        </header>
+
+        <div class="journey" data-journey>
+          <div class="journey__line" aria-hidden="true"><span class="journey__fill" data-journey-fill></span></div>
+          <!-- Built from CONFIG.programme + i18n programme.steps -->
+          <ol class="journey__steps" data-journey-steps></ol>
+        </div>
+
+        <h3 class="subhead reveal" data-i18n="programme.momentsTitle">The main moments</h3>
+        <ul class="events" data-events></ul>
+
+        <ul class="notes">
+          <li class="note reveal">
+            <p class="label" data-i18n="programme.notes.dress.label">Dress code</p>
+            <p class="note__title" data-i18n="programme.notes.dress.title">Elegant summer attire</p>
+            <p class="note__text" data-i18n="programme.notes.dress.text"></p>
+          </li>
+          <li class="note reveal" style="--delay: 0.1s">
+            <p class="label" data-i18n="programme.notes.kids.label">Children</p>
+            <p class="note__title" data-i18n="programme.notes.kids.title">To be confirmed</p>
+            <p class="note__text" data-i18n="programme.notes.kids.text"></p>
+          </li>
+          <li class="note reveal" style="--delay: 0.2s">
+            <p class="label" data-i18n="programme.notes.plusOnes.label">Plus-ones</p>
+            <p class="note__title" data-i18n="programme.notes.plusOnes.title">To be confirmed</p>
+            <p class="note__text" data-i18n="programme.notes.plusOnes.text"></p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <!-- @@sections -->
   </main>
 

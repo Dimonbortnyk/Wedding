@@ -100,6 +100,82 @@ const en = {
       text: 'A first walk through El Born became a first kiss. We toast it with cava from the hills outside the city — and the little flower from Barcelona’s pavements is hiding in our ornaments too.',
     },
   },
+  countdown: {
+    label: 'Counting down to',
+    title: 'The Big Day',
+    days: 'Days',
+    hours: 'Hours',
+    minutes: 'Minutes',
+    seconds: 'Seconds',
+    date: 'August 7, 2027 • Kaunas, Lithuania',
+    today: 'Today is the day!',
+    after: 'We said yes! Thank you for celebrating with us.',
+  },
+  programme: {
+    label: 'The celebration',
+    title: 'The Day',
+    intro: 'From the first hello to the last dance — here is how the day will unfold.',
+    tbc: 'Times to be confirmed',
+    momentsTitle: 'The main moments',
+    steps: {
+      arrival: {
+        title: 'Arrival & welcome',
+        desc: 'Find your way to Babtyno dvaras, say your hellos and settle in with something cool to drink.',
+        where: 'Manor courtyard',
+      },
+      ceremony: {
+        title: 'The ceremony',
+        desc: 'We say “yes”, surrounded by the people we love most.',
+        where: 'Manor park',
+        highlight: 'We say yes',
+      },
+      breadSalt: {
+        title: 'Bread & salt',
+        desc: 'The traditional welcome of the newlyweds — a custom Lithuania and Ukraine share.',
+        where: 'Manor steps',
+      },
+      cava: {
+        title: 'Cava toast, canapés & photos',
+        desc: 'A glass of cava for Barcelona, something to nibble and plenty of photos in the gardens.',
+        where: 'The gardens',
+        highlight: 'A toast to Barcelona',
+      },
+      banquet: {
+        title: 'The banquet',
+        desc: 'Dinner from both our kitchens, with a few toasts along the way.',
+        where: 'Banquet hall',
+        highlight: 'Two cuisines, one table',
+      },
+      firstDance: {
+        title: 'First dance',
+        desc: 'We open the dance floor — then it is all yours.',
+        where: 'Banquet hall',
+      },
+      party: {
+        title: 'The party',
+        desc: 'Dancing until late, with a midnight snack to keep you going.',
+        where: 'Banquet hall',
+        highlight: 'Dancing until late',
+      },
+    },
+    notes: {
+      dress: {
+        label: 'Dress code',
+        title: 'Elegant summer attire',
+        text: 'Light fabrics and garden-friendly shoes — part of the day is out on the lawn.',
+      },
+      kids: {
+        label: 'Children',
+        title: 'To be confirmed',
+        text: 'We are still working out the details and will share them here soon.',
+      },
+      plusOnes: {
+        label: 'Plus-ones',
+        title: 'To be confirmed',
+        text: 'Your invitation will name everyone we are expecting. Not sure? Just ask us.',
+      },
+    },
+  },
   /* @@en */
 };
 

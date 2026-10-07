@@ -189,6 +189,110 @@ renderers.push(() => {
     .join('');
 });
 
+/* ───────────────────────────── Countdown ───────────────────────────── */
+
+const { date: weddingDate, ceremonyTime, utcOffset } = CONFIG.wedding;
+const ceremonyAt = new Date(`${weddingDate}T${ceremonyTime}:00${utcOffset}`);
+const DAY_OF_LENGTH_MS = 12 * 60 * 60 * 1000;
+
+function tickCountdown() {
+  const grid = $('[data-countdown]');
+  const done = $('[data-countdown-done]');
+  const remaining = ceremonyAt - Date.now();
+
+  if (remaining <= 0) {
+    grid.hidden = true;
+    done.hidden = false;
+    done.textContent = t(-remaining < DAY_OF_LENGTH_MS ? 'countdown.today' : 'countdown.after');
+    return false;
+  }
+
+  const total = Math.floor(remaining / 1000);
+  const values = {
+    days: Math.floor(total / 86400),
+    hours: Math.floor((total % 86400) / 3600),
+    minutes: Math.floor((total % 3600) / 60),
+    seconds: total % 60,
+  };
+  Object.entries(values).forEach(([unit, value]) => {
+    const text = unit === 'days' ? String(value) : String(value).padStart(2, '0');
+    const node = $(`[data-unit="${unit}"]`, grid);
+    if (node.textContent !== text) node.textContent = text;
+  });
+  return true;
+}
+
+renderers.push(tickCountdown);
+
+setups.push(() => {
+  const timer = setInterval(() => {
+    if (!document.hidden && !tickCountdown()) clearInterval(timer);
+  }, 1000);
+});
+
+/* ───────────────────────────── The Day ───────────────────────────── */
+
+renderers.push(() => {
+  $('[data-times-notice]').hidden = CONFIG.timesConfirmed;
+
+  $('[data-journey-steps]').innerHTML = CONFIG.programme
+    .map((step) => {
+      const base = `programme.steps.${step.id}`;
+      const where = t(`${base}.where`);
+      return `
+        <li class="journey__step reveal" data-step>
+          <span class="journey__icon">${icon(step.icon)}</span>
+          <time class="journey__time" datetime="${step.time}">${step.time}</time>
+          <div class="journey__body">
+            <h3 class="journey__title">${esc(t(`${base}.title`))}</h3>
+            <p>${esc(t(`${base}.desc`))}</p>
+            ${where === `${base}.where` ? '' : `<p class="journey__where">${icon('pin')}${esc(where)}</p>`}
+          </div>
+        </li>`;
+    })
+    .join('');
+
+  $('[data-events]').innerHTML = CONFIG.programme
+    .filter((step) => step.featured)
+    .map((step, index) => {
+      const base = `programme.steps.${step.id}`;
+      return `
+        <li class="card card--lift event reveal" style="--delay: ${index * 0.1}s">
+          <div class="event__media">
+            ${photo(step.photo, '', 'event__photo')}
+            <time class="event__badge" datetime="${step.time}">${step.time}</time>
+          </div>
+          <div class="event__body">
+            <h4 class="event__title">${esc(t(`${base}.title`))}</h4>
+            <p class="event__highlight">${esc(t(`${base}.highlight`))}</p>
+          </div>
+        </li>`;
+    })
+    .join('');
+
+  updateJourney();
+});
+
+// Draw the timeline as it is scrolled, lighting each step when the line reaches it.
+function updateJourney() {
+  const journey = $('[data-journey]');
+  const steps = $$('[data-step]', journey);
+  if (!steps.length) return;
+
+  const rect = journey.getBoundingClientRect();
+  const drawn = reducedMotion.matches
+    ? rect.height
+    : Math.min(Math.max(window.innerHeight * 0.62 - rect.top, 0), rect.height);
+  $('[data-journey-fill]').style.transform = `scaleY(${(drawn / rect.height).toFixed(4)})`;
+
+  steps.forEach((step) => {
+    const iconRect = $('.journey__icon', step).getBoundingClientRect();
+    step.classList.toggle('is-reached', iconRect.top + iconRect.height / 2 - rect.top <= drawn + 1);
+  });
+}
+
+setups.push(() => scrollTasks.push(updateJourney));
+
 /* @@features */
 
 /* ───────────────────────────── Boot ───────────────────────────── */
