@@ -12,7 +12,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Great+Vibes&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -91,30 +91,39 @@
   </header>
 
   <main id="main">
-    <section class="hero" id="top">
-      <figure class="photo photo--dark photo--bg hero__media" data-photo="hero.jpg" data-parallax>
-        <img src="assets/photos/hero.jpg" alt="" fetchpriority="high" data-i18n-attr="alt:hero.alt">
-      </figure>
-      <div class="hero__overlay" aria-hidden="true"></div>
-
-      <div class="hero__content">
-        <p class="label label--light hero__rise" data-i18n="hero.eyebrow">Together with their families</p>
-        <h1 class="hero__names hero__rise">
+    <section class="hero" id="top" data-hero>
+      <div class="hero__top" data-hero-layer="top">
+        <p class="label hero__rise" data-i18n="hero.eyebrow">Together with their families</p>
+        <h1 class="hero__names hero__rise" style="--d: 0.12s">
           <span data-config="couple.first">Ugne</span>
           <span class="hero__amp" aria-hidden="true">&amp;</span><span class="sr-only" data-i18n="hero.and">and</span>
           <span data-config="couple.second">Dimon</span>
         </h1>
-        <p class="hero__date hero__rise">
-          <span class="hero__day" data-i18n="hero.day">Seventh of August</span>
-          <span class="hero__year" data-i18n="hero.year">Two Thousand Twenty Seven</span>
-        </p>
-        <svg class="ornament ornament--light hero__rise" viewBox="0 0 240 24" aria-hidden="true" focusable="false"><use href="#i-ornament"/></svg>
-        <p class="hero__place hero__rise" data-i18n="hero.place">Babtyno dvaras • Kaunas, Lithuania</p>
       </div>
 
-      <a class="hero__scroll" href="#story">
-        <span class="sr-only" data-i18n="hero.scroll">Scroll to our story</span>
-      </a>
+      <!-- Shadow-box frame with the photo-booth strip. Photos come from CONFIG.hero.booth. -->
+      <div class="hero__stage" data-hero-layer="frame">
+        <div class="booth hero__rise" style="--d: 0.3s" tabindex="0" role="group" data-booth data-i18n-attr="aria-label:hero.boothLabel">
+          <div class="booth__frame">
+            <div class="booth__mat">
+              <div class="booth__tilt">
+                <div class="booth__strip" data-booth-strip></div>
+              </div>
+              <div class="booth__grain" aria-hidden="true"></div>
+              <div class="booth__depth" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__bottom" data-hero-layer="bottom">
+        <p class="hero__save hero__rise" style="--d: 0.5s" data-i18n="hero.saveTheDate">Save the Date</p>
+        <p class="hero__date hero__rise" style="--d: 0.6s">
+          <time datetime="2027-08-07" data-hero-date><span aria-hidden="true" data-hero-date-digits>07 · 08 · 2027</span><span class="sr-only" data-hero-date-text></span></time>
+        </p>
+        <p class="label hero__place hero__rise" style="--d: 0.68s" data-i18n="hero.place">Babtyno dvaras • Kaunas, Lithuania</p>
+        <a class="btn btn--ghost hero__open hero__rise" style="--d: 0.8s" href="#story" data-i18n="hero.open">Open invitation</a>
+      </div>
     </section>
 
     <section class="section" id="story">

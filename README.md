@@ -39,7 +39,7 @@ see changes.
 ## Add your photos
 
 Drop JPEGs into `assets/photos/` using the filenames listed in
-[`assets/photos/README.md`](assets/photos/README.md) (`hero.jpg`, `barcelona.jpg`, …,
+[`assets/photos/README.md`](assets/photos/README.md) (`booth-01.jpg`, `barcelona.jpg`, …,
 `gallery-08.jpg`). That file says where each one appears and what size to export.
 
 Until a photo exists the site shows a beige frame with the filename, so you can add them
@@ -53,6 +53,7 @@ that is expected and goes away as you add them.
 | To change… | Edit |
 | --- | --- |
 | Date, ceremony time, time zone (drives the countdown) | `wedding` |
+| Photo-booth strip on the opening screen: which photos, and black-and-white / sepia / colour | `hero` |
 | Venue name, **street address**, map link or embedded map | `venue` |
 | Programme times and order; hide the "Times to be confirmed" badge | `programme`, `timesConfirmed` |
 | Which dishes are on the menu and their V / VG / GF tags; hide the "Sample menu" badge | `menu` |
@@ -75,7 +76,8 @@ language falls back to English, so nothing ever shows up blank.
   `title` / `desc` / `where` under `programme.steps` in each language.
 - To add an FAQ entry: add a `{ q, a }` pair under `faq.items` in each language.
 - A few date phrases are written out by hand and are **not** derived from `config.js`:
-  `hero.day`, `hero.year`, `countdown.date`, `footer.date` and `meta.title`.
+  `countdown.date`, `footer.date` and `meta.title`. (The `07 · 08 · 2027` on the opening
+  screen does follow `config.js`; `hero.dateFormat` only sets its order and separators.)
 
 The Spanish, Lithuanian and Ukrainian texts are complete but machine-written; have a
 native speaker read them before sharing (each block is marked `TODO` in the file).

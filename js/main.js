@@ -157,12 +157,85 @@ setups.push(() => {
   });
 
   const header = $('[data-header]');
-  const heroMedia = $('[data-parallax]');
-  scrollTasks.push((y) => {
-    header.classList.toggle('is-scrolled', y > 24);
-    if (heroMedia && !reducedMotion.matches && y <= window.innerHeight) {
-      heroMedia.style.transform = `translate3d(0, ${(y * 0.22).toFixed(1)}px, 0)`;
-    }
+  scrollTasks.push((y) => header.classList.toggle('is-scrolled', y > 24));
+});
+
+/* ───────────────────────────── Hero — photo-booth strip ───────────────────────────── */
+
+renderers.push(() => {
+  const { booth: files, boothFilter } = CONFIG.hero;
+  const strip = $('[data-booth-strip]');
+  $('[data-booth]').dataset.filter = boothFilter;
+
+  // Built once: re-rendering on a language change would restart the loop.
+  if (!strip.children.length) {
+    // Two identical sets, so sliding the strip by one set's height loops seamlessly.
+    const set = (isCopy) => `
+      <ul class="booth__set"${isCopy ? ' aria-hidden="true"' : ''}>
+        ${files
+          .map(
+            (file, i) => `
+              <li class="booth__cell" style="--i: ${i}">
+                <figure class="photo booth__photo" data-photo="${esc(file)}">
+                  <img src="assets/photos/${esc(file)}" alt="" width="1000" height="750" decoding="async" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}>
+                  <span class="booth__develop" aria-hidden="true"></span>
+                </figure>
+              </li>`,
+          )
+          .join('')}
+      </ul>`;
+    strip.innerHTML = set(false) + set(true);
+  }
+  $$('.booth__set:not([aria-hidden]) img', strip).forEach((img, i) => {
+    img.alt = t('hero.boothAlt', { n: i + 1 });
+  });
+
+  const [yyyy, mm, dd] = CONFIG.wedding.date.split('-');
+  $('[data-hero-date]').dateTime = CONFIG.wedding.date;
+  $('[data-hero-date-digits]').textContent = t('hero.dateFormat', { dd, mm, yyyy });
+  $('[data-hero-date-text]').textContent = formatDate(CONFIG.wedding.date);
+});
+
+setups.push(() => {
+  const hero = $('[data-hero]');
+  const booth = $('[data-booth]');
+  const layer = (name) => $(`[data-hero-layer="${name}"]`, hero);
+  const layers = { top: layer('top'), frame: layer('frame'), bottom: layer('bottom') };
+
+  // The strip rests while nobody can see it: hero scrolled away, or tab in the background.
+  // (Hover and focus pause it too — that part is plain CSS.)
+  let offscreen = false;
+  const syncPaused = () => booth.classList.toggle('is-paused', offscreen || document.hidden);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      offscreen = !entry.isIntersecting;
+      syncPaused();
+    }).observe(hero);
+  }
+  document.addEventListener('visibilitychange', syncPaused);
+
+  // Parallax: the text leaves a little faster than the page, the frame lags behind,
+  // and everything fades as Our Story arrives.
+  let lastY = -1;
+  scrollTasks.push((scrollY) => {
+    if (reducedMotion.matches) return;
+    const vh = window.innerHeight;
+    // Past one screen the hero is out of sight: hold the last values and skip the writes.
+    const y = Math.min(scrollY, vh);
+    if (y === lastY) return;
+    lastY = y;
+    const shift = (node, rate) => {
+      node.style.transform = `translate3d(0, ${(y * rate).toFixed(1)}px, 0)`;
+    };
+    const fade = (node, distance) => {
+      node.style.opacity = Math.max(0, 1 - y / (vh * distance)).toFixed(3);
+    };
+    shift(layers.top, -0.12);
+    shift(layers.frame, 0.07);
+    shift(layers.bottom, -0.05);
+    fade(layers.top, 0.7);
+    fade(layers.frame, 0.85);
+    fade(layers.bottom, 0.45); // gone before the lagging frame can catch it up
   });
 });
 

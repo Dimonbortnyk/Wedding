@@ -21,6 +21,14 @@ export const CONFIG = {
     utcOffset: '+03:00',
   },
 
+  // The opening screen: a photo-booth strip that scrolls inside a shadow-box frame.
+  hero: {
+    // Files in assets/photos/, top to bottom. Landscape 4:3.
+    booth: ['booth-01.jpg', 'booth-02.jpg', 'booth-03.jpg', 'booth-04.jpg'],
+    // How the strip is toned: 'bw' | 'sepia' | 'none'. Upload colour photos as they are.
+    boothFilter: 'bw',
+  },
+
   venue: {
     name: 'Babtyno dvaras',
     // PLACEHOLDER — replace with the exact street address.

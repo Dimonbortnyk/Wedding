@@ -6,7 +6,7 @@ you can add them one at a time.
 
 | File | Where it appears | Orientation | Recommended size |
 | --- | --- | --- | --- |
-| `hero.jpg` | Full-screen opening photo, behind the names (a dark overlay is added) | Landscape; keep faces away from the centre, where the names sit | 2400 × 1600 px |
+| `booth-01.jpg` … `booth-04.jpg` | Opening screen — the photo-booth strip scrolling inside the frame, top to bottom | Landscape (4:3); keep faces centred, as the edges are cropped to 4:3 and the strip is tilted | 1000 × 750 px |
 | `barcelona.jpg` | Our Story — 14 January 2024, Barcelona | Portrait (4:5) | 1200 × 1500 px |
 | `bologna.jpg` | Our Story — 9 February 2024, Bologna | Portrait (4:5) | 1200 × 1500 px |
 | `trakai.jpg` | Our Story — 19 April 2025, Trakai (the proposal) | Portrait (4:5) | 1200 × 1500 px |
@@ -27,9 +27,23 @@ Three gallery photos are also reused on the event cards in **The Day**:
 To use different photos for those cards, change the `photo` values under `programme`
 in `js/config.js`. To add or remove gallery photos, edit the `gallery` list there.
 
+## The photo-booth strip
+
+- Upload the four booth photos **in colour, as they are**. The site turns them black and
+  white with a CSS filter; switch to sepia or to the original colours with
+  `hero.boothFilter` (`'bw'`, `'sepia'` or `'none'`) in `js/config.js`.
+- Close-ups work best — the frames are small, especially on a phone. Think real photo
+  booth: two faces filling the frame, a different expression in each.
+- To change the order or the filenames, edit `hero.booth` in `js/config.js`.
+
 ## Tips
 
+- **Filenames are case-sensitive once the site is on GitHub Pages.** `Barcelona.jpg` or
+  `forever.jpeg` will work on a Windows or Mac laptop and then break online; use
+  lowercase names ending in `.jpg`, exactly as listed above.
 - Export as JPEG, quality around 80, sRGB. Aim for under ~400 KB per photo
-  (under ~600 KB for `hero.jpg` and `countdown.jpg`) — many guests will be on mobile data.
-- Everything except the hero is lazy-loaded, so a large gallery does not slow the first screen.
+  (under ~150 KB for each booth photo, under ~600 KB for `countdown.jpg`) — many guests
+  will be on mobile data.
+- Everything except the first booth photo is lazy-loaded, so a large gallery does not
+  slow the first screen.
 - Describe each gallery photo for screen readers in `js/i18n.js` → `gallery.alts`.
