@@ -198,6 +198,11 @@ main {
   text-transform: uppercase;
 }
 
+/* Headings that receive focus after a jump (Our Story, after the letter) show no ring. */
+.title:focus {
+  outline: none;
+}
+
 .title {
   margin-top: 0.75rem;
   font-family: var(--font-display);
@@ -884,8 +889,17 @@ main {
   --ease-letter: cubic-bezier(0.3, 0.1, 0.2, 1);
   position: relative;
   width: var(--ew);
+  /* A hurried double-click on the heart must not end up selecting the card's text as it
+     slides in under the pointer. main.js adds .is-settled once the card has arrived. */
+  -webkit-user-select: none;
+  user-select: none;
   /* 0.12 clearance + envelope + drop + room for the shadow: the open layout, reserved up front. */
   height: calc(var(--he) * 1.86);
+}
+
+.envelope.is-settled .envelope__card {
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 /* Pointer tilt (desktop, closed only): main.js sets --rx / --ry. */
@@ -1349,6 +1363,317 @@ main {
 
   .js .booth__develop {
     display: none;
+  }
+}
+
+/* Invitation letter — opens from "Open invitation", leaves as petals
+   ---------------------------------------------------------------------------
+   A tri-fold sheet: three panels (top folds down, bottom folds up) under one flat
+   layer of text. The rules describe the letter lying open; `.is-unfolding` plays
+   the way in, `.is-leaving` the way out.                                        */
+
+.is-scroll-locked {
+  overflow: hidden;
+}
+
+/* Where the scrollbar takes up room, keep its width so nothing shifts sideways. */
+.is-scroll-locked.has-scrollbar {
+  scrollbar-gutter: stable;
+}
+
+.letter {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden auto;
+  background: transparent;
+  color: var(--ink);
+}
+
+.letter[open] {
+  display: grid;
+  align-items: safe center;
+  justify-items: center;
+}
+
+.letter::backdrop {
+  background: transparent;
+}
+
+/* Warm ivory veil with a soft blur over the page. Ours rather than ::backdrop, so it can
+   dissolve while the dialog is still open and the petals are falling. */
+.letter__veil {
+  position: fixed;
+  inset: 0;
+  background: rgba(250, 248, 244, 0.84);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: opacity 0.9s ease 0.3s;
+}
+
+.letter__sheet {
+  position: relative;
+  width: min(34rem, 90vw);
+  margin-block: 0.75rem;
+  padding: clamp(1.6rem, 5.5svh, 3.25rem) clamp(1.5rem, 7vw, 3.25rem);
+  transition: opacity 0.12s linear;
+}
+
+.letter__shadow {
+  position: absolute;
+  inset: 0.4rem;
+  box-shadow: 0 2.2rem 3.5rem -1.2rem rgba(43, 38, 34, 0.38), 0 0.6rem 1.2rem -0.4rem rgba(43, 38, 34, 0.18);
+}
+
+.letter__panel {
+  position: absolute;
+  inset-inline: 0;
+  height: 33.4%;
+  transform-style: preserve-3d;
+}
+
+.letter__panel--top {
+  top: 0;
+  z-index: 3;
+  transform: perspective(90rem) rotateX(0deg);
+  transform-origin: 50% 100%;
+}
+
+.letter__panel--mid {
+  top: 33.3%;
+  z-index: 1;
+}
+
+.letter__panel--bottom {
+  bottom: 0;
+  z-index: 2;
+  transform: perspective(90rem) rotateX(0deg);
+  transform-origin: 50% 0;
+}
+
+/* Two faces per panel: the written side, and the plain back seen while it is folded.
+   main.js clips each face to a slightly uneven outline for the deckled edge. */
+.letter__panel i {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  background: var(--grain), #FDFBF6;
+  background-blend-mode: soft-light, normal;
+}
+
+.letter__panel i + i {
+  background: var(--grain), #F1EBE0;
+  background-blend-mode: soft-light, normal;
+  transform: rotateY(180deg);
+}
+
+/* Thin gold double border, drawn a third at a time, and a faint crease at each fold. */
+.letter__panel i:first-child::before,
+.letter__panel i:first-child::after {
+  content: '';
+  position: absolute;
+  border: 1px solid var(--gold);
+}
+
+.letter__panel i:first-child::after {
+  border-color: rgba(184, 147, 90, 0.4);
+}
+
+.letter__panel--top i:first-child {
+  background: var(--grain), linear-gradient(0deg, rgba(43, 38, 34, 0.045), rgba(43, 38, 34, 0) 0.6rem), #FDFBF6;
+  background-blend-mode: soft-light, normal, normal;
+}
+
+.letter__panel--top i:first-child::before {
+  inset: 0.55rem 0.55rem 0;
+  border-bottom: 0;
+}
+
+.letter__panel--top i:first-child::after {
+  inset: 0.9rem 0.9rem 0;
+  border-bottom: 0;
+}
+
+.letter__panel--mid i:first-child::before {
+  inset: 0 0.55rem;
+  border-block: 0;
+}
+
+.letter__panel--mid i:first-child::after {
+  inset: 0 0.9rem;
+  border-block: 0;
+}
+
+.letter__panel--bottom i:first-child {
+  background: var(--grain), linear-gradient(180deg, rgba(43, 38, 34, 0.045), rgba(43, 38, 34, 0) 0.6rem), #FDFBF6;
+  background-blend-mode: soft-light, normal, normal;
+}
+
+.letter__panel--bottom i:first-child::before {
+  inset: 0 0.55rem 0.55rem;
+  border-top: 0;
+}
+
+.letter__panel--bottom i:first-child::after {
+  inset: 0 0.9rem 0.9rem;
+  border-top: 0;
+}
+
+.letter__content {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.45rem, 1.7svh, 1.1rem);
+  text-align: center;
+}
+
+.letter__content .ornament {
+  width: min(11rem, 55%);
+  margin: 0;
+}
+
+.letter__title {
+  font-family: var(--font-script);
+  font-size: clamp(1.9rem, min(8.5vw, 6svh), 3.25rem);
+  font-weight: 400;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.letter__body,
+.letter__closing {
+  font-family: var(--font-display);
+  font-size: clamp(1.0625rem, min(4.5vw, 2.6svh), 1.375rem);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.letter__closing {
+  font-style: italic;
+}
+
+.letter__signature {
+  font-family: var(--font-script);
+  font-size: clamp(1.6rem, min(7.5vw, 4.6svh), 2.4rem);
+  line-height: 1.2;
+}
+
+.letter__cta {
+  min-height: 2.75rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+}
+
+.letter__monogram {
+  color: var(--gold-ink);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  letter-spacing: 0.22em;
+  line-height: 1.2;
+}
+
+/* The way out. Non-reduced: the paper vanishes under the petals and the veil dissolves. */
+.letter.is-leaving .letter__sheet {
+  opacity: 0;
+}
+
+.letter.is-leaving .letter__veil {
+  opacity: 0;
+}
+
+.petals {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* The way in: rise out of the Save the Date card (--fx/--fy/--fs from main.js), unfold the
+   top third and then the bottom, let the shadow settle, then write the lines one by one. */
+@media (prefers-reduced-motion: no-preference) {
+  .letter.is-unfolding .letter__veil {
+    animation: letter-fade 0.5s ease both;
+  }
+
+  .letter.is-unfolding .letter__sheet {
+    animation: letter-rise 0.8s var(--ease) both;
+  }
+
+  .letter.is-unfolding .letter__panel--top {
+    animation: letter-fold-top 0.6s ease-in-out 0.3s both;
+  }
+
+  .letter.is-unfolding .letter__panel--bottom {
+    animation: letter-fold-bottom 0.65s ease-in-out 0.55s both;
+  }
+
+  .letter.is-unfolding .letter__shadow {
+    animation: letter-fade 0.5s ease 0.8s both;
+  }
+
+  .letter.is-unfolding .letter__line {
+    animation: letter-line 0.5s var(--ease) both;
+    animation-delay: calc(1.15s + var(--n) * 0.11s);
+  }
+}
+
+@keyframes letter-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes letter-rise {
+  from {
+    opacity: 0;
+    transform: translate(var(--fx, 0), var(--fy, 3rem)) scale(var(--fs, 0.6));
+  }
+}
+
+@keyframes letter-fold-top {
+  from {
+    transform: perspective(90rem) rotateX(-179deg);
+  }
+}
+
+@keyframes letter-fold-bottom {
+  from {
+    transform: perspective(90rem) rotateX(179deg);
+  }
+}
+
+@keyframes letter-line {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+/* Reduced motion: no unfolding and no petals. The letter fades in and fades out — the one
+   place these durations are allowed to stand, since a fade is the gentle option here. */
+@media (prefers-reduced-motion: reduce) {
+  .letter {
+    transition: opacity 0.3s ease !important;
+  }
+
+  .letter.is-fading {
+    animation: letter-fade 0.3s ease both !important;
+  }
+
+  .letter.is-leaving {
+    opacity: 0;
   }
 }
 

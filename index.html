@@ -189,7 +189,7 @@
       <div class="container">
         <header class="section__head reveal">
           <p class="label" data-i18n="story.label">How it all began</p>
-          <h2 class="title" data-i18n="story.title">Our Story</h2>
+          <h2 class="title" tabindex="-1" data-i18n="story.title">Our Story</h2>
           <p class="quote" data-i18n="story.quote">We said “I love you” in every language we knew — and it meant the same in each one.</p>
           <svg class="ornament" viewBox="0 0 240 24" aria-hidden="true" focusable="false"><use href="#i-ornament"/></svg>
         </header>
@@ -527,6 +527,30 @@
       </div>
     </section>
   </main>
+
+  <!-- The invitation letter. Opens from "Open invitation" on the Save the Date card. -->
+  <dialog class="letter" data-letter aria-labelledby="letter-title">
+    <div class="letter__veil" aria-hidden="true"></div>
+    <div class="letter__sheet" data-letter-sheet>
+      <div class="letter__shadow" aria-hidden="true"></div>
+      <!-- The paper, in three folding panels: <i> = written side, second <i> = back. -->
+      <div class="letter__panel letter__panel--top" data-letter-panel="top" aria-hidden="true"><i></i><i></i></div>
+      <div class="letter__panel letter__panel--mid" data-letter-panel="mid" aria-hidden="true"><i></i></div>
+      <div class="letter__panel letter__panel--bottom" data-letter-panel="bottom" aria-hidden="true"><i></i><i></i></div>
+
+      <div class="letter__content">
+        <svg class="ornament letter__line" style="--n: 0" viewBox="0 0 240 24" aria-hidden="true" focusable="false"><use href="#i-ornament"/></svg>
+        <h2 class="letter__title letter__line" style="--n: 1" id="letter-title" data-i18n="letter.title">We’re getting married!</h2>
+        <p class="letter__body letter__line" style="--n: 2" data-i18n="letter.body">On the 7th of August 2027 we would love to share a very special day with you at Babtyno dvaras, Kaunas, Lithuania — where a love story between two cultures comes together as one, our own Pangea.</p>
+        <p class="letter__closing letter__line" style="--n: 3" data-i18n="letter.closing">We invite you to discover our love story.</p>
+        <p class="letter__signature letter__line" style="--n: 4" data-i18n="letter.signature">Ugne &amp; Dimon</p>
+        <p class="letter__line" style="--n: 5">
+          <button class="btn btn--ghost letter__cta" type="button" data-letter-go data-i18n="letter.cta">Discover our story</button>
+        </p>
+        <p class="letter__monogram letter__line" style="--n: 6" data-config="couple.monogram">U &amp; D</p>
+      </div>
+    </div>
+  </dialog>
 
   <dialog class="lightbox" data-lightbox data-i18n-attr="aria-label:gallery.title">
     <button class="lightbox__btn lightbox__close" type="button" data-lightbox-close data-i18n-attr="aria-label:gallery.close">

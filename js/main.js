@@ -269,6 +269,9 @@ setups.push(() => {
     float.style.transform = '';
     setTilt(0, 0);
 
+    // Once the card has arrived its text can be selected again (see .envelope in the CSS).
+    setTimeout(() => envelope.classList.add('is-settled'), still ? 0 : 2600);
+
     seal.setAttribute('aria-expanded', 'true');
     const sealHadFocus = document.activeElement === seal;
     setTimeout(
@@ -302,6 +305,164 @@ setups.push(() => {
     });
     envelope.addEventListener('pointerleave', () => setTilt(0, 0));
   }
+});
+
+/* ───────────────────────────── Invitation letter ───────────────────────────── */
+
+// "Open invitation" unfolds a letter in a full-screen <dialog>. Leaving it (button or Esc)
+// turns the letter into petals (js/petals.js) while the page scrolls on to Our Story.
+setups.push(() => {
+  const dialog = $('[data-letter]');
+  const sheet = $('[data-letter-sheet]', dialog);
+  const go = $('[data-letter-go]', dialog);
+  const link = $('[data-envelope-link]');
+  const story = $('#story');
+  const heading = $('.title', story);
+  if (typeof dialog.showModal !== 'function') return; // old browser: the link just jumps to #story
+
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const root = document.documentElement;
+  function lockScroll(on) {
+    // Keep the scrollbar's width while locked, but only where a scrollbar takes up room.
+    const hasGutter = window.innerWidth - root.clientWidth > 0;
+    if (on) root.classList.toggle('has-scrollbar', hasGutter);
+    root.classList.toggle('is-scroll-locked', on);
+  }
+  let leaving = false;
+  let burst = null;
+  let petalsModule = null;
+
+  // Deckled paper: clip each panel to a slightly uneven outline along the letter's outer edges.
+  function deckle(node, sides) {
+    const { offsetWidth: w, offsetHeight: h } = node;
+    const STEP = 16;
+    const CORNER = 0.9;
+    const jitter = () => (Math.random() * 1.9).toFixed(2);
+    const points = [];
+    const edge = (length, rough, point) => {
+      points.push(point(0, rough ? CORNER : 0));
+      if (rough) for (let d = STEP; d < length - STEP / 2; d += STEP) points.push(point(d, jitter()));
+      points.push(point(length, rough ? CORNER : 0));
+    };
+    const inset = (side) => (sides.includes(side) ? CORNER : 0);
+    edge(w, sides.includes('top'), (d, j) => `${Math.min(Math.max(d, inset('left')), w - inset('right'))}px ${j}px`);
+    edge(h, sides.includes('right'), (d, j) => `calc(100% - ${j}px) ${d}px`);
+    edge(w, sides.includes('bottom'), (d, j) => `${Math.min(Math.max(w - d, inset('left')), w - inset('right'))}px calc(100% - ${j}px)`);
+    edge(h, sides.includes('left'), (d, j) => `${j}px ${h - d}px`);
+    node.style.clipPath = `polygon(${points.join(', ')})`;
+  }
+
+  function shapePaper() {
+    const sidesOf = { top: ['top', 'right', 'left'], mid: ['right', 'left'], bottom: ['right', 'bottom', 'left'] };
+    $$('[data-letter-panel]', dialog).forEach((panel) => {
+      $$('i', panel).forEach((face) => deckle(face, sidesOf[panel.dataset.letterPanel]));
+    });
+  }
+
+  function reset() {
+    dialog.classList.remove('is-unfolding', 'is-fading', 'is-leaving');
+    lockScroll(false);
+    leaving = false;
+    burst = null;
+  }
+
+  function openLetter(event) {
+    event.preventDefault();
+    if (dialog.open) return;
+    reset();
+    lockScroll(true);
+    dialog.showModal();
+    shapePaper();
+
+    if (reducedMotion.matches) {
+      dialog.classList.add('is-fading');
+    } else {
+      // Start folded, at the size and place of the Save the Date card, and unfold from there.
+      const from = $('.envelope__card').getBoundingClientRect();
+      const to = sheet.getBoundingClientRect();
+      sheet.style.setProperty('--fx', `${(from.left + from.width / 2 - (to.left + to.width / 2)).toFixed(1)}px`);
+      sheet.style.setProperty('--fy', `${(from.top + from.height / 2 - (to.top + to.height / 2)).toFixed(1)}px`);
+      sheet.style.setProperty('--fs', (from.width / to.width).toFixed(3));
+      dialog.classList.add('is-unfolding');
+      petalsModule ??= import('./petals.js'); // fetched now, so the exit never waits for it
+    }
+    go.focus({ preventScroll: true });
+  }
+
+  function arrive() {
+    if (dialog.open) dialog.close(); // hands focus back to "Open invitation"…
+    reset();
+    heading.focus({ preventScroll: true }); // …and we move it on to where the guest now is
+  }
+
+  async function leave(origin) {
+    if (leaving || !dialog.open) return;
+    leaving = true;
+
+    if (reducedMotion.matches) {
+      dialog.classList.add('is-leaving'); // a plain fade
+      await wait(320);
+      arrive();
+      story.scrollIntoView({ block: 'start' });
+      return;
+    }
+
+    const rect = sheet.getBoundingClientRect();
+    const { burstPetals } = await (petalsModule ??= import('./petals.js'));
+    if (!dialog.open) return; // closed while the module was loading
+    // Drop the entrance animations first and let that style settle: a property still held
+    // by a finished animation would jump to its new value instead of transitioning.
+    dialog.classList.remove('is-unfolding');
+    void dialog.offsetWidth;
+    dialog.classList.add('is-leaving'); // the paper goes the instant the petals appear
+    burst = burstPetals({
+      host: dialog,
+      rect,
+      origin: origin ?? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 },
+      count: window.innerWidth < 600 ? 80 : 140,
+    });
+    // As the petals start to fall, let the page move: Our Story arrives underneath them.
+    setTimeout(() => {
+      lockScroll(false);
+      story.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 380);
+    await burst.done;
+    arrive();
+  }
+
+  link.addEventListener('click', openLetter);
+  go.addEventListener('click', (event) => {
+    // A keyboard "click" has no position: start from the button itself.
+    const box = go.getBoundingClientRect();
+    const byPointer = event.detail > 0;
+    leave({
+      x: byPointer ? event.clientX : box.left + box.width / 2,
+      y: byPointer ? event.clientY : box.top + box.height / 2,
+    });
+  });
+  // Esc leaves the same way the button does. Caught on keydown, because browsers only let a
+  // page veto the dialog's own `cancel` now and then; `cancel` still covers the back gesture.
+  dialog.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    event.preventDefault();
+    leave();
+  });
+  dialog.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    leave();
+  });
+  // Safety net: if the browser closes the dialog over our head, there is no stage left for
+  // the petals — tidy up and still take the guest on to Our Story.
+  dialog.addEventListener('close', () => {
+    if (!dialog.classList.contains('is-unfolding') && !dialog.classList.contains('is-fading') && !leaving) return;
+    burst?.cancel();
+    reset();
+    story.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    heading.focus({ preventScroll: true });
+  });
+  window.addEventListener('resize', () => {
+    if (dialog.open && !leaving) shapePaper();
+  });
 });
 
 /* ───────────────────────────── Our Story ───────────────────────────── */

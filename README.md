@@ -14,6 +14,7 @@ js/config.js          facts: dates, times, menu, bank details, RSVP backend   ‚Ü
 js/i18n.js            words: every visible string, in four languages         ‚Üê and this
 js/main.js            behaviour: rendering, countdown, timeline, gallery, form
 js/rsvp.js            submitRsvp() and its backends (local / Formspree / Supabase)
+js/petals.js          the petal burst when the invitation letter is closed
 assets/photos/        your photos (see assets/photos/README.md)
 assets/icons/         favicon and a standalone copy of the ornament
 docs/rsvp-backend.md  how to receive RSVPs for real

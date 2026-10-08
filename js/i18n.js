@@ -54,6 +54,13 @@ const en = {
     boothLabel: 'Photo-booth strip of Ugne and Dimon. Hover or focus to pause it.',
     boothAlt: 'Ugne and Dimon — photo-booth picture {n}',
   },
+  letter: {
+    title: 'We’re getting married!',
+    body: 'On the 7th of August 2027 we would love to share a very special day with you at Babtyno dvaras, Kaunas, Lithuania — where a love story between two cultures comes together as one, our own Pangea.',
+    closing: 'We invite you to discover our love story.',
+    signature: 'Ugne & Dimon',
+    cta: 'Discover our story',
+  },
   story: {
     label: 'How it all began',
     title: 'Our Story',
@@ -426,6 +433,13 @@ const es = {
     sealHint: 'Toca el corazón para abrir',
     boothLabel: 'Tira de fotomatón de Ugne y Dimon. Pasa el cursor o pon el foco para pausarla.',
     boothAlt: 'Ugne y Dimon — foto de fotomatón {n}',
+  },
+  letter: {
+    title: '¡Nos casamos!',
+    body: 'El próximo 7 de agosto de 2027 nos encantaría compartir contigo un día muy especial en Babtyno dvaras, Kaunas, Lituania, donde una historia de amor entre dos culturas se une para formar una sola: nuestra propia Pangea.',
+    closing: 'Te invitamos a descubrir nuestra historia de amor.',
+    signature: 'Ugne & Dimon',
+    cta: 'Descubre nuestra historia',
   },
   story: {
     label: 'Cómo empezó todo',
@@ -800,6 +814,13 @@ const lt = {
     boothLabel: 'Ugnės ir Dimon nuotraukų juostelė iš foto būdelės. Užveskite pelę arba sufokusuokite, kad ją sustabdytumėte.',
     boothAlt: 'Ugnė ir Dimon — foto būdelės nuotrauka {n}',
   },
+  letter: {
+    title: 'Mes tuokiamės!',
+    body: '2027 m. rugpjūčio 7 d. labai norėtume kartu su jumis praleisti ypatingą dieną Babtyno dvare, Kauno rajone, Lietuvoje — ten, kur dviejų kultūrų meilės istorija susilieja į vieną: mūsų pačių Pangėją.',
+    closing: 'Kviečiame atrasti mūsų meilės istoriją.',
+    signature: 'Ugnė & Dimon',
+    cta: 'Atraskite mūsų istoriją',
+  },
   story: {
     label: 'Kaip viskas prasidėjo',
     title: 'Mūsų istorija',
@@ -1172,6 +1193,13 @@ const uk = {
     sealHint: 'Торкніться серця, щоб відкрити',
     boothLabel: 'Стрічка знімків Угне та Дімона з фотобудки. Наведіть курсор або сфокусуйтеся, щоб її зупинити.',
     boothAlt: 'Угне та Дімон — знімок із фотобудки {n}',
+  },
+  letter: {
+    title: 'Ми одружуємося!',
+    body: '7 серпня 2027 року ми будемо раді розділити з вами дуже особливий день у маєтку Babtyno dvaras, Каунас, Литва, — там, де історія кохання двох культур зливається в одну: нашу власну Пангею.',
+    closing: 'Запрошуємо вас відкрити нашу історію кохання.',
+    signature: 'Угне & Дімон',
+    cta: 'Відкрийте нашу історію',
   },
   story: {
     label: 'Як усе почалося',
