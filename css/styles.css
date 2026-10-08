@@ -18,6 +18,7 @@
   --gold-ink: #7F6130;
   --muted-ink: #6B6159;
   --error: #9C3B2E;
+  --seal: #B23A3A; /* the heart on the envelope, and nothing else */
 
   --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
   --font-body: 'Jost', 'Helvetica Neue', Arial, sans-serif;
@@ -114,6 +115,12 @@ button {
 
 ::selection {
   background: var(--sand);
+}
+
+/* Slide-in reveals start off to one side. Clipping on <body> alone does not stop a phone
+   from widening its layout viewport to fit them, so clip here as well. */
+main {
+  overflow-x: clip;
 }
 
 .sprite {
@@ -617,12 +624,26 @@ button {
   flex-direction: column;
   align-items: center;
   gap: clamp(0.5rem, 1.8svh, 1.25rem);
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: calc(var(--header-h) + clamp(0rem, 1.5svh, 1rem)) var(--gutter) clamp(1rem, 3svh, 2.25rem);
+  padding: 0 var(--gutter) clamp(3rem, 8svh, 5rem);
   overflow: hidden;
   background: radial-gradient(ellipse 80% 60% at 50% 40%, #FFFDF9, var(--ivory) 60%, #F6F1E9);
   text-align: center;
+}
+
+/* Names + frame fill the first screen, minus a strip at the bottom where the envelope peeks in. */
+.hero__first {
+  --peek: clamp(5.5rem, 13svh, 7.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.5rem, 1.8svh, 1.25rem);
+  width: 100%;
+  height: calc(100vh - var(--peek));
+  height: calc(100svh - var(--peek));
+  min-height: 27rem;
+  /* No taller than the frame at its widest needs, so tall phones show more of the envelope. */
+  max-height: calc(var(--header-h) + 9.5rem + min(102vw, 40.5rem));
+  padding-top: calc(var(--header-h) + clamp(0rem, 1.5svh, 1rem));
 }
 
 /* Paper tooth. */
@@ -657,7 +678,7 @@ button {
   color: #A9834A; /* --gold, a shade deeper so it holds 3:1 on ivory */
 }
 
-/* The frame takes whatever height the text leaves, so the whole hero fits one screen. */
+/* The frame takes whatever height the names leave on the first screen. */
 .hero__stage {
   position: relative;
   z-index: 1;
@@ -824,35 +845,430 @@ button {
     inset 0 -1.2cqw 3cqw rgba(43, 38, 34, 0.14);
 }
 
-.hero__save {
-  font-family: var(--font-script);
-  font-size: clamp(2rem, min(9.5vw, 6.5svh), 3.25rem);
-  line-height: 1.2;
+@media (max-width: 479.98px) {
+  .hero__top .label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+  }
 }
 
-.hero__date {
-  padding-left: 0.28em; /* balances the trailing letter-spacing */
-  font-size: clamp(1.125rem, min(3.4svh, 5.6vw), 1.625rem);
+/* Hero — the love-letter envelope and the Save the Date card
+   ---------------------------------------------------------------------------
+   Everything is sized from two lengths: --ew (envelope width) and --he (its height).
+   The rules below describe the OPEN envelope; the closed one is the override further
+   down, so without JavaScript, or with reduced motion, the card is simply there.
+
+   Layers, back to front:  shadow · back · [flap when open] · card · pocket ·
+                           [flap when closed] · string · seal · hearts            */
+
+.hero__bottom {
+  --ew: min(80vw, 22rem);
+  --he: calc(var(--ew) * 0.75);
+  margin-top: clamp(0.25rem, 1.2svh, 0.75rem);
+}
+
+@media (min-width: 600px) {
+  .hero__bottom {
+    --ew: clamp(20rem, 26vw, 25rem);
+    --he: calc(var(--ew) / 1.5);
+  }
+}
+
+.envelope {
+  --env-front: color-mix(in srgb, var(--blush) 70%, #FFF);
+  --env-flap: color-mix(in srgb, var(--blush) 82%, #FFF);
+  --env-lining: color-mix(in srgb, var(--blush) 84%, #7A4A3C);
+  --env-string: #F4EBDA;
+  --rise: calc(var(--he) * 0.82); /* how far the card travels out of the pocket */
+  --drop: calc(var(--he) * 0.64); /* how far the envelope sinks to make room for it */
+  --ease-letter: cubic-bezier(0.3, 0.1, 0.2, 1);
+  position: relative;
+  width: var(--ew);
+  /* 0.12 clearance + envelope + drop + room for the shadow: the open layout, reserved up front. */
+  height: calc(var(--he) * 1.86);
+}
+
+/* Pointer tilt (desktop, closed only): main.js sets --rx / --ry. */
+.envelope__tilt {
+  position: absolute;
+  inset: 0;
+  transform: perspective(60rem) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.4s ease-out;
+}
+
+.envelope__drop {
+  position: absolute;
+  inset: calc(var(--he) * 0.12) 0 auto;
+  height: var(--he);
+  transform: translateY(var(--drop));
+  /* Sinks while the flap swings up, so the flap's point never reaches the frame above. */
+  transition: transform 0.9s var(--ease-letter) 0.3s;
+}
+
+.envelope__float {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.5s ease;
+}
+
+.envelope__float > * {
+  position: absolute;
+}
+
+.envelope__shadow {
+  inset: auto 3% -9% 3%;
+  height: 16%;
+  background: radial-gradient(ellipse at center, rgba(43, 38, 34, 0.3), rgba(43, 38, 34, 0) 68%);
+}
+
+.envelope__back {
+  inset: 0;
+  z-index: 1;
+  background: var(--grain), linear-gradient(180deg, color-mix(in srgb, var(--env-lining) 82%, #2B2622), var(--env-lining) 45%);
+  background-blend-mode: soft-light, normal;
+}
+
+/* Pointed top flap, hinged on the top edge. Two faces: paper outside, lining inside. */
+.envelope__flap {
+  inset: 0 0 auto;
+  z-index: 2;
+  height: 60%;
+  transform: perspective(60rem) rotateX(180deg);
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  /* Halfway through the turn (90deg) it swaps from in front of the card to behind it. */
+  transition: transform 0.75s ease-in-out 0.3s, z-index 0s linear 0.675s;
+}
+
+.envelope__flap-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  filter: drop-shadow(0 0.2rem 0.25rem rgba(43, 38, 34, 0.22));
+}
+
+.envelope__flap-face::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.envelope__flap-face--outer::before {
+  background: var(--grain), linear-gradient(180deg, var(--env-front), var(--env-flap));
+  background-blend-mode: soft-light, normal;
+}
+
+.envelope__flap-face--inner {
+  transform: rotateY(180deg);
+}
+
+.envelope__flap-face--inner::before {
+  background: var(--grain), linear-gradient(180deg, color-mix(in srgb, var(--env-lining) 88%, #2B2622), var(--env-lining) 60%);
+  background-blend-mode: soft-light, normal;
+}
+
+.envelope__card-wrap {
+  inset: 6% 5% auto;
+  z-index: 3;
+  height: 90%;
+  transform: translateY(calc(var(--rise) * -1));
+  transition: transform 1s var(--ease-letter) 0.95s;
+}
+
+.envelope__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--ew) * 0.012);
+  height: 100%;
+  padding: calc(var(--ew) * 0.035) calc(var(--ew) * 0.05);
+  background: var(--grain), linear-gradient(180deg, #FFFEFB, var(--ivory));
+  background-blend-mode: soft-light, normal;
+  box-shadow: 0 0 0 1px rgba(184, 147, 90, 0.22), 0 1.1rem 1.75rem -1rem rgba(43, 38, 34, 0.5);
+  /* The last beat: the card lifts a touch towards the reader. */
+  transform: scale(1.035);
+  transition: transform 0.5s var(--ease) 1.75s;
+}
+
+/* Card lines fade in one after another once the card is out. */
+.envelope__line {
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+  transition-delay: calc(1.5s + var(--n) * 0.09s);
+}
+
+.card__save {
+  font-family: var(--font-script);
+  font-size: clamp(1.75rem, calc(var(--ew) * 0.1), 2.5rem);
+  line-height: 1.15;
+}
+
+.card__digits {
+  padding-left: 0.26em; /* balances the trailing letter-spacing */
+  font-size: clamp(1.0625rem, calc(var(--ew) * 0.062), 1.5rem);
   font-weight: 300;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.26em;
+  line-height: 1.3;
+}
+
+.card__long {
+  color: var(--muted-ink);
+  font-size: clamp(0.75rem, calc(var(--ew) * 0.036), 0.875rem);
+  letter-spacing: 0.04em;
   line-height: 1.4;
 }
 
-.hero__place {
-  margin-top: 0.25rem;
+.card__place {
+  font-size: clamp(0.5625rem, calc(var(--ew) * 0.027), 0.6875rem);
+  letter-spacing: 0.18em;
 }
 
-.hero__open {
-  min-height: 2.875rem;
-  margin-top: clamp(0.6rem, 2svh, 1.25rem);
-  padding: 0.7rem 2rem;
+.card__open {
+  min-height: 2.75rem;
+  margin-top: calc(var(--ew) * 0.02);
+  padding: 0.55rem 1.1rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
 }
 
-@media (max-width: 479.98px) {
-  .hero__top .label,
-  .hero__place {
-    font-size: 0.6875rem;
-    letter-spacing: 0.22em;
+/* Front of the envelope: one sheet with a V cut for the mouth, plus the bottom fold on top. */
+.envelope__pocket {
+  inset: 0;
+  z-index: 4;
+  filter: drop-shadow(0 -0.12rem 0.2rem rgba(43, 38, 34, 0.2));
+  pointer-events: none;
+}
+
+.envelope__pocket-front {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+  background: var(--grain), linear-gradient(90deg, var(--env-flap), var(--env-front) 26%, var(--env-front) 74%, var(--env-flap));
+  background-blend-mode: soft-light, normal;
+}
+
+.envelope__pocket-front::before,
+.envelope__pocket-front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 100%, 50% 47%, 100% 100%);
+}
+
+/* A hairline of shade under the bottom fold's edge… */
+.envelope__pocket-front::before {
+  background: rgba(43, 38, 34, 0.12);
+  transform: translateY(-2px);
+}
+
+/* …and the fold itself. */
+.envelope__pocket-front::after {
+  background: var(--grain), linear-gradient(0deg, var(--env-flap), var(--env-front) 70%);
+  background-blend-mode: soft-light, normal;
+}
+
+/* String: once across the envelope and twice round the button. Gone once open. */
+.envelope__string {
+  --seal-size: max(2.75rem, calc(var(--ew) * 0.13));
+  inset: 0;
+  z-index: 7;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(1.25rem) rotate(2deg);
+  transition: opacity 0.4s ease-out 0.1s, transform 0.5s ease-in 0.1s;
+}
+
+.envelope__string::before {
+  content: '';
+  position: absolute;
+  inset: 57% -1% auto;
+  height: 2px;
+  margin-top: -1px;
+  background: var(--env-string);
+  box-shadow: 0 1px 1px rgba(43, 38, 34, 0.3);
+}
+
+.envelope__string::after {
+  content: '';
+  position: absolute;
+  top: 57%;
+  left: 50%;
+  width: calc(var(--seal-size) * 0.92);
+  height: calc(var(--seal-size) * 0.92);
+  margin: calc(var(--seal-size) * -0.46) 0 0 calc(var(--seal-size) * -0.46);
+  border: 2px solid var(--env-string);
+  border-radius: 50%;
+  box-shadow: 0 1px 1px rgba(43, 38, 34, 0.3), 2px 3px 0 -1px var(--env-string); /* second turn of the string */
+}
+
+/* Heart-shaped button seal. A real <button>: click, tap or Enter opens the envelope. */
+.envelope__seal {
+  --seal-size: max(2.75rem, calc(var(--ew) * 0.13));
+  top: 57%;
+  left: 50%;
+  z-index: 8;
+  width: var(--seal-size);
+  height: var(--seal-size);
+  margin: calc(var(--seal-size) * -0.5) 0 0 calc(var(--seal-size) * -0.5);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s linear 0.6s;
+}
+
+.envelope__seal svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0.12rem 0.15rem rgba(43, 38, 34, 0.4));
+  transition: transform 0.35s var(--ease);
+}
+
+.envelope__seal:hover svg {
+  transform: scale(1.08);
+}
+
+.envelope__seal-heart {
+  fill: var(--seal);
+}
+
+.envelope__seal-gloss {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+}
+
+.envelope__seal-hole {
+  fill: color-mix(in srgb, var(--seal) 55%, #2B2622);
+}
+
+.envelope.is-open .envelope__seal {
+  animation: seal-pop 0.5s var(--ease) both;
+}
+
+@keyframes seal-pop {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  35% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/* A few small hearts drift up, once, as the card comes out. */
+.envelope__motes {
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+}
+
+.envelope__mote {
+  position: absolute;
+  top: 18%;
+  left: var(--x);
+  width: calc(1.1rem * var(--s));
+  height: calc(1.1rem * var(--s));
+  fill: var(--gold);
+  opacity: 0;
+}
+
+.envelope__mote--blush {
+  fill: var(--blush);
+}
+
+.envelope.is-open .envelope__mote {
+  animation: mote-drift 1.7s ease-out both;
+  animation-delay: calc(1.15s + var(--t));
+}
+
+@keyframes mote-drift {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.4) rotate(-12deg);
+  }
+
+  25% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--dx), calc(var(--he) * var(--up) * -1), 0) scale(1) rotate(14deg);
+  }
+}
+
+/* The closed envelope. Only where motion is welcome, and only once the page knows it can
+   open it again (.envelope-ready is set in <head>, .is-open by main.js). */
+@media (prefers-reduced-motion: no-preference) {
+  .envelope-ready .envelope:not(.is-open) .envelope__drop {
+    transform: none;
+  }
+
+  .envelope-ready .envelope:not(.is-open) .envelope__float {
+    animation: envelope-float 7s ease-in-out infinite;
+  }
+
+  .envelope-ready .envelope:not(.is-open) .envelope__flap {
+    z-index: 6;
+    transform: perspective(60rem) rotateX(0deg);
+  }
+
+  .envelope-ready .envelope:not(.is-open) .envelope__drop {
+    cursor: pointer;
+  }
+
+  .envelope-ready .envelope:not(.is-open) .envelope__card-wrap {
+    /* Sealed inside: a tap on the paper must not reach the card's button underneath. */
+    pointer-events: none;
+    transform: none;
+  }
+
+  .envelope-ready .envelope:not(.is-open) .envelope__card {
+    transform: none;
+  }
+
+  .envelope-ready .envelope:not(.is-open) .envelope__line {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+
+  .envelope-ready .envelope:not(.is-open) .envelope__string {
+    opacity: 1;
+    transform: none;
+  }
+
+  .envelope-ready .envelope:not(.is-open) .envelope__seal {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes envelope-float {
+  0%,
+  100% {
+    transform: translateY(-4px) rotate(-0.6deg);
+  }
+
+  50% {
+    transform: translateY(4px) rotate(0.6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .envelope__motes {
+    display: none;
   }
 }
 

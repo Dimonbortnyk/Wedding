@@ -14,6 +14,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Great+Vibes&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <script>
+    // The envelope is drawn closed from the first paint. If the module script never runs
+    // (for example on file://), take the class back off so the card is not locked inside.
+    document.documentElement.classList.add('envelope-ready');
+    setTimeout(function () {
+      if (!document.documentElement.classList.contains('js')) document.documentElement.classList.remove('envelope-ready');
+    }, 4000);
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
@@ -54,6 +62,7 @@
     <symbol id="i-dance" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></symbol>
     <symbol id="i-party" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.5 5.5l3 3M15.5 15.5l3 3M18.5 5.5l-3 3M8.5 15.5l-3 3"/></symbol>
 
+    <symbol id="i-heart-solid" viewBox="0 0 24 24"><path d="M12 21S3 15.5 3 9.25A4.75 4.75 0 0 1 12 6.75 4.75 4.75 0 0 1 21 9.25C21 15.5 12 21 12 21z"/></symbol>
     <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-9.5A4 4 0 0 1 12 8a4 4 0 0 1 7 2.5c0 5-7 9.5-7 9.5z"/></symbol>
     <symbol id="i-copy" viewBox="0 0 24 24"><path d="M9 9h10v11H9zM5 15V4h10"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
@@ -92,6 +101,8 @@
 
   <main id="main">
     <section class="hero" id="top" data-hero>
+      <!-- First screen: names and frame. It stops short of the fold so the envelope peeks in. -->
+      <div class="hero__first">
       <div class="hero__top" data-hero-layer="top">
         <p class="label hero__rise" data-i18n="hero.eyebrow">Together with their families</p>
         <h1 class="hero__names hero__rise" style="--d: 0.12s">
@@ -116,13 +127,60 @@
         </div>
       </div>
 
+      </div>
+
+      <!-- The love-letter envelope. It opens once (seal click, or when scrolled into view) and
+           the Save the Date card slides out. The card is always in the DOM for screen readers. -->
       <div class="hero__bottom" data-hero-layer="bottom">
-        <p class="hero__save hero__rise" style="--d: 0.5s" data-i18n="hero.saveTheDate">Save the Date</p>
-        <p class="hero__date hero__rise" style="--d: 0.6s">
-          <time datetime="2027-08-07" data-hero-date><span aria-hidden="true" data-hero-date-digits>07 · 08 · 2027</span><span class="sr-only" data-hero-date-text></span></time>
-        </p>
-        <p class="label hero__place hero__rise" style="--d: 0.68s" data-i18n="hero.place">Babtyno dvaras • Kaunas, Lithuania</p>
-        <a class="btn btn--ghost hero__open hero__rise" style="--d: 0.8s" href="#story" data-i18n="hero.open">Open invitation</a>
+        <div class="envelope hero__rise" style="--d: 0.9s" data-envelope>
+          <div class="envelope__tilt">
+            <div class="envelope__drop" data-envelope-body>
+              <div class="envelope__float" data-envelope-float>
+                <div class="envelope__shadow" aria-hidden="true"></div>
+                <div class="envelope__back" aria-hidden="true"></div>
+
+                <div class="envelope__flap" aria-hidden="true">
+                  <div class="envelope__flap-face envelope__flap-face--outer"></div>
+                  <div class="envelope__flap-face envelope__flap-face--inner"></div>
+                </div>
+
+                <!-- Before the card in the DOM so the keyboard reaches the seal first. -->
+                <button class="envelope__seal" type="button" aria-expanded="false" aria-controls="save-the-date" data-envelope-seal data-i18n-attr="aria-label:hero.sealLabel">
+                  <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                    <path class="envelope__seal-heart" d="M24 42S6 31 6 18.5A9.5 9.5 0 0 1 24 13.5 9.5 9.5 0 0 1 42 18.5C42 31 24 42 24 42z"/>
+                    <path class="envelope__seal-gloss" d="M11.5 18.5a5.5 5.5 0 0 1 5-5.4"/>
+                    <circle class="envelope__seal-hole" cx="20.5" cy="23" r="1.6"/><circle class="envelope__seal-hole" cx="27.5" cy="23" r="1.6"/>
+                  </svg>
+                </button>
+
+                <div class="envelope__card-wrap">
+                  <div class="envelope__card" id="save-the-date">
+                    <p class="envelope__line card__save" style="--n: 0" data-i18n="hero.saveTheDate">Save the Date</p>
+                    <p class="envelope__line card__digits" style="--n: 1">
+                      <time datetime="2027-08-07" data-hero-date><span aria-hidden="true" data-hero-date-digits>07 · 08 · 2027</span></time>
+                    </p>
+                    <p class="envelope__line card__long" style="--n: 2" data-hero-date-text>7 August 2027</p>
+                    <p class="envelope__line label card__place" style="--n: 3" data-i18n="hero.place">Babtyno dvaras • Kaunas, Lithuania</p>
+                    <p class="envelope__line" style="--n: 4">
+                      <a class="btn btn--ghost card__open" href="#story" data-envelope-link data-i18n="hero.open">Open invitation</a>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="envelope__pocket" aria-hidden="true"><div class="envelope__pocket-front"></div></div>
+                <div class="envelope__string" aria-hidden="true"></div>
+
+                <div class="envelope__motes" aria-hidden="true">
+                  <svg class="envelope__mote" viewBox="0 0 24 24" style="--x: 22%; --dx: -18px; --up: 0.62; --t: 0s; --s: 0.7"><use href="#i-heart-solid"/></svg>
+                  <svg class="envelope__mote envelope__mote--blush" viewBox="0 0 24 24" style="--x: 38%; --dx: 10px; --up: 0.85; --t: 0.18s; --s: 0.5"><use href="#i-heart-solid"/></svg>
+                  <svg class="envelope__mote" viewBox="0 0 24 24" style="--x: 55%; --dx: -6px; --up: 0.7; --t: 0.08s; --s: 0.6"><use href="#i-heart-solid"/></svg>
+                  <svg class="envelope__mote envelope__mote--blush" viewBox="0 0 24 24" style="--x: 68%; --dx: 16px; --up: 0.92; --t: 0.3s; --s: 0.75"><use href="#i-heart-solid"/></svg>
+                  <svg class="envelope__mote" viewBox="0 0 24 24" style="--x: 80%; --dx: 22px; --up: 0.6; --t: 0.22s; --s: 0.45"><use href="#i-heart-solid"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 

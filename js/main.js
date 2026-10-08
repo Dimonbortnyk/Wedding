@@ -202,7 +202,7 @@ setups.push(() => {
   const layer = (name) => $(`[data-hero-layer="${name}"]`, hero);
   const layers = { top: layer('top'), frame: layer('frame'), bottom: layer('bottom') };
 
-  // The strip rests while nobody can see it: hero scrolled away, or tab in the background.
+  // The strip rests while nobody can see it: frame scrolled away, or tab in the background.
   // (Hover and focus pause it too — that part is plain CSS.)
   let offscreen = false;
   const syncPaused = () => booth.classList.toggle('is-paused', offscreen || document.hidden);
@@ -210,33 +210,110 @@ setups.push(() => {
     new IntersectionObserver(([entry]) => {
       offscreen = !entry.isIntersecting;
       syncPaused();
-    }).observe(hero);
+    }).observe(layers.frame);
   }
   document.addEventListener('visibilitychange', syncPaused);
 
-  // Parallax: the text leaves a little faster than the page, the frame lags behind,
-  // and everything fades as Our Story arrives.
+  // Parallax: the names leave a little faster than the page; the frame and the envelope lag
+  // behind together, so they never close in on each other. Names and frame fade once the
+  // envelope has the stage. The envelope itself never fades: it has a card to deliver.
   let lastY = -1;
   scrollTasks.push((scrollY) => {
     if (reducedMotion.matches) return;
     const vh = window.innerHeight;
-    // Past one screen the hero is out of sight: hold the last values and skip the writes.
+    // Past one screen the first block is out of sight: hold the last values and skip the writes.
     const y = Math.min(scrollY, vh);
     if (y === lastY) return;
     lastY = y;
     const shift = (node, rate) => {
       node.style.transform = `translate3d(0, ${(y * rate).toFixed(1)}px, 0)`;
     };
-    const fade = (node, distance) => {
-      node.style.opacity = Math.max(0, 1 - y / (vh * distance)).toFixed(3);
+    const fade = (node, from, over) => {
+      node.style.opacity = Math.min(1, Math.max(0, 1 - (y - vh * from) / (vh * over))).toFixed(3);
     };
     shift(layers.top, -0.12);
-    shift(layers.frame, 0.07);
-    shift(layers.bottom, -0.05);
-    fade(layers.top, 0.7);
-    fade(layers.frame, 0.85);
-    fade(layers.bottom, 0.45); // gone before the lagging frame can catch it up
+    shift(layers.frame, 0.05);
+    shift(layers.bottom, 0.05);
+    fade(layers.top, 0.1, 0.6);
+    fade(layers.frame, 0.6, 0.4);
   });
+});
+
+/* ───────────────────────────── Hero — envelope ───────────────────────────── */
+
+// When the photo-booth entrance (rise + develop) is over; the envelope waits for it.
+const BOOTH_ENTRANCE_MS = 2800;
+
+setups.push(() => {
+  const envelope = $('[data-envelope]');
+  const body = $('[data-envelope-body]', envelope);
+  const float = $('[data-envelope-float]', envelope);
+  const seal = $('[data-envelope-seal]', envelope);
+  const link = $('[data-envelope-link]', envelope);
+  const still = reducedMotion.matches;
+  let opened = false;
+
+  const setTilt = (rx, ry) => {
+    envelope.style.setProperty('--rx', `${rx.toFixed(2)}deg`);
+    envelope.style.setProperty('--ry', `${ry.toFixed(2)}deg`);
+  };
+
+  // Opens once and stays open. CSS runs the sequence off `.is-open`.
+  function open() {
+    if (opened) return;
+    opened = true;
+
+    // Catch the idle float wherever it is and ease it to rest, instead of letting it snap.
+    const drift = getComputedStyle(float).transform;
+    if (drift !== 'none') float.style.transform = drift;
+    envelope.classList.add('is-open');
+    void float.offsetWidth;
+    float.style.transform = '';
+    setTilt(0, 0);
+
+    seal.setAttribute('aria-expanded', 'true');
+    const sealHadFocus = document.activeElement === seal;
+    setTimeout(
+      () => {
+        seal.hidden = true; // popped: take it out of the tab order
+        if (sealHadFocus) link.focus({ preventScroll: true });
+      },
+      still ? 0 : 650,
+    );
+  }
+
+  seal.addEventListener('click', open);
+  // The seal is the control; for a mouse or a finger the whole envelope is a fair target too.
+  body.addEventListener('click', open);
+  // Tabbing to the card's button while it is still sealed inside opens the envelope too.
+  link.addEventListener('focus', open);
+
+  if (still || !('IntersectionObserver' in window)) {
+    open();
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.intersectionRatio < 0.6) return;
+      observer.disconnect();
+      setTimeout(open, Math.max(0, BOOTH_ENTRANCE_MS - performance.now()));
+    },
+    { threshold: 0.6 },
+  );
+  observer.observe(body);
+
+  // A slight 3D tilt towards the pointer while the envelope is closed (mouse only).
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    envelope.addEventListener('pointermove', (event) => {
+      if (opened) return;
+      const rect = body.getBoundingClientRect();
+      const px = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width)) - 0.5;
+      const py = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height)) - 0.5;
+      setTilt(py * -10, px * 10);
+    });
+    envelope.addEventListener('pointerleave', () => setTilt(0, 0));
+  }
 });
 
 /* ───────────────────────────── Our Story ───────────────────────────── */
