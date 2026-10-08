@@ -1115,20 +1115,30 @@ main {
   border: 0;
   border-radius: 50%;
   background: none;
+  cursor: pointer;
   opacity: 0;
   visibility: hidden;
-  transition: visibility 0s linear 0.6s;
+  transition: transform 0.3s var(--ease), visibility 0s linear 0.6s;
+}
+
+/* "Tap the heart to open" — sits just under the closed envelope and leaves when it opens. */
+.envelope__hint {
+  position: absolute;
+  inset: calc(var(--he) * 1.27) 0 auto;
+  color: var(--muted-ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.0625rem, calc(var(--ew) * 0.055), 1.25rem);
+  font-style: italic;
+  line-height: 1.3;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease-out, visibility 0s linear 0.35s;
 }
 
 .envelope__seal svg {
   width: 100%;
   height: 100%;
   filter: drop-shadow(0 0.12rem 0.15rem rgba(43, 38, 34, 0.4));
-  transition: transform 0.35s var(--ease);
-}
-
-.envelope__seal:hover svg {
-  transform: scale(1.08);
 }
 
 .envelope__seal-heart {
@@ -1225,9 +1235,6 @@ main {
     transform: perspective(60rem) rotateX(0deg);
   }
 
-  .envelope-ready .envelope:not(.is-open) .envelope__drop {
-    cursor: pointer;
-  }
 
   .envelope-ready .envelope:not(.is-open) .envelope__card-wrap {
     /* Sealed inside: a tap on the paper must not reach the card's button underneath. */
@@ -1252,6 +1259,40 @@ main {
   .envelope-ready .envelope:not(.is-open) .envelope__seal {
     opacity: 1;
     visibility: visible;
+  }
+
+  .envelope-ready .envelope:not(.is-open) .envelope__seal:hover {
+    transform: scale(1.14);
+  }
+
+  /* The invitation to click: two soft beats, then rest. */
+  .envelope-ready .envelope:not(.is-open) .envelope__seal svg {
+    animation: seal-beat 3s ease-in-out infinite;
+  }
+
+  .envelope-ready .envelope:not(.is-open) .envelope__hint {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes seal-beat {
+  0%,
+  28%,
+  100% {
+    transform: scale(1);
+  }
+
+  7% {
+    transform: scale(1.13);
+  }
+
+  14% {
+    transform: scale(1);
+  }
+
+  21% {
+    transform: scale(1.08);
   }
 }
 

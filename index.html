@@ -129,10 +129,11 @@
 
       </div>
 
-      <!-- The love-letter envelope. It opens once (seal click, or when scrolled into view) and
+      <!-- The love-letter envelope. It opens once, when the guest presses the heart seal, and
            the Save the Date card slides out. The card is always in the DOM for screen readers. -->
       <div class="hero__bottom" data-hero-layer="bottom">
         <div class="envelope hero__rise" style="--d: 0.9s" data-envelope>
+          <p class="envelope__hint" data-i18n="hero.sealHint">Tap the heart to open</p>
           <div class="envelope__tilt">
             <div class="envelope__drop" data-envelope-body>
               <div class="envelope__float" data-envelope-float>

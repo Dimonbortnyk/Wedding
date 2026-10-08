@@ -241,9 +241,6 @@ setups.push(() => {
 
 /* ───────────────────────────── Hero — envelope ───────────────────────────── */
 
-// When the photo-booth entrance (rise + develop) is over; the envelope waits for it.
-const BOOTH_ENTRANCE_MS = 2800;
-
 setups.push(() => {
   const envelope = $('[data-envelope]');
   const body = $('[data-envelope-body]', envelope);
@@ -262,6 +259,7 @@ setups.push(() => {
   function open() {
     if (opened) return;
     opened = true;
+    link.removeAttribute('tabindex');
 
     // Catch the idle float wherever it is and ease it to rest, instead of letting it snap.
     const drift = getComputedStyle(float).transform;
@@ -282,26 +280,16 @@ setups.push(() => {
     );
   }
 
-  seal.addEventListener('click', open);
-  // The seal is the control; for a mouse or a finger the whole envelope is a fair target too.
-  body.addEventListener('click', open);
-  // Tabbing to the card's button while it is still sealed inside opens the envelope too.
-  link.addEventListener('focus', open);
-
-  if (still || !('IntersectionObserver' in window)) {
-    open();
+  if (still) {
+    open(); // reduced motion: the card is simply there
     return;
   }
 
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.intersectionRatio < 0.6) return;
-      observer.disconnect();
-      setTimeout(open, Math.max(0, BOOTH_ENTRANCE_MS - performance.now()));
-    },
-    { threshold: 0.6 },
-  );
-  observer.observe(body);
+  // Only the heart opens it (click, tap, Enter or Space). Until then the card's button is
+  // sealed inside: out of the tab order, so Tab lands on the seal, but still read by
+  // screen readers along with the rest of the card.
+  link.tabIndex = -1;
+  seal.addEventListener('click', open);
 
   // A slight 3D tilt towards the pointer while the envelope is closed (mouse only).
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
