@@ -1,5 +1,14 @@
 node_modules/
 .env
+.env.*
 .DS_Store
 Thumbs.db
 .vscode/
+.idea/
+*.log
+
+# Full-size, unprocessed photos (may carry EXIF/GPS) — never publish these
+assets/photos/_originals/
+
+# Design references (mock-ups, inspiration) — not part of the site
+Design/
