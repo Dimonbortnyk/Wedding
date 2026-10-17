@@ -57,6 +57,7 @@ that is expected and goes away as you add them.
 | Photo-booth strip on the opening screen: which photos, and black-and-white / sepia / colour | `hero` |
 | The church (ceremony) and the manor (celebration): name, **street address**, map link or embedded map | `church`, `venue` |
 | Programme times and order; hide the "Times to be confirmed" badge | `programme`, `timesConfirmed` |
+| Show or hide the Menu section (off for now) | `sections.menu` |
 | Which dishes are on the menu and their V / VG / GF tags; hide the "Sample menu" badge | `menu` |
 | Gallery photos | `gallery` |
 | Airport drive times | `travel` |
@@ -130,7 +131,7 @@ Two things to know before going live:
 - [ ] Venue street address (`venue.address`)
 - [ ] Church → manor transport confirmed (programme `transfer` step, Travel note, FAQ)
 - [ ] Programme times confirmed, then `timesConfirmed: true`
-- [ ] Final menu, then `menu.isSample: false`
+- [ ] Final menu, then `menu.isSample: false` and `sections.menu: true`
 - [ ] RSVP deadline confirmed and a real `rsvp.backend` configured and tested
 - [ ] Bank details (`gifts`) and contact email (`contact.email`)
 - [ ] Placeholder texts replaced: children, plus-ones, parking, ceremony language,

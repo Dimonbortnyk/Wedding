@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ugne &amp; Dimon — 7 August 2027</title>
-  <meta name="description" content="Ugne and Dimon are getting married on 7 August 2027 at the Church of St. George in Vilkija, with the celebration at Babtyno dvaras, near Kaunas, Lithuania. The day, the menu, travel and RSVP.">
+  <meta name="description" content="Ugne and Dimon are getting married on 7 August 2027 at the Church of St. George in Vilkija, with the celebration at Babtyno dvaras, near Kaunas, Lithuania. The day, travel and RSVP.">
   <!-- A private invitation: keep it out of search engines. Remove this line if you want it indexed. -->
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#2B2622">
@@ -86,7 +86,7 @@
         <ul class="site-nav__list">
           <li><a href="#story" data-i18n="nav.story">Our Story</a></li>
           <li><a href="#day" data-i18n="nav.day">The Day</a></li>
-          <li><a href="#menu" data-i18n="nav.menu">Menu</a></li>
+          <li data-section="menu" hidden><a href="#menu" data-i18n="nav.menu">Menu</a></li>
           <li><a href="#travel" data-i18n="nav.travel">Travel</a></li>
           <li><a href="#rsvp" data-i18n="nav.rsvp">RSVP</a></li>
           <li><a href="#gifts" data-i18n="nav.gifts">Gifts</a></li>
@@ -294,7 +294,8 @@
       </div>
     </section>
 
-    <section class="section section--linen" id="menu">
+    <!-- Shown only while CONFIG.sections.menu is true. -->
+    <section class="section section--linen" id="menu" data-section="menu" hidden>
       <div class="container container--narrow">
         <header class="section__head reveal">
           <p class="label" data-i18n="menu.label">To eat &amp; drink</p>
@@ -572,7 +573,7 @@
   </footer>
 
   <noscript>
-    <p class="noscript">This site needs JavaScript for the programme, menu and RSVP form. Please enable it, or write to us and we will send you everything by email.</p>
+    <p class="noscript">This site needs JavaScript for the programme and the RSVP form. Please enable it, or write to us and we will send you everything by email.</p>
   </noscript>
 
   <script type="module" src="js/main.js"></script>

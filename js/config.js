@@ -84,7 +84,12 @@ export const CONFIG = {
     { id: 'forever', date: '2027-08-07', photo: 'forever.jpg' },
   ],
 
-  // Sample menu. Dish names and descriptions: i18n.js → menu.items.<id>.
+  // Optional sections. Switch one back on with `true`; its content below stays in place.
+  sections: {
+    menu: false,
+  },
+
+  // Sample menu (shown only while `sections.menu` is true). Dish names and descriptions: i18n.js → menu.items.<id>.
   // Tags: 'V' vegetarian, 'VG' vegan, 'GF' gluten-free.
   menu: {
     isSample: true,

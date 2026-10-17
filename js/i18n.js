@@ -23,7 +23,7 @@ const en = {
   meta: {
     title: 'Ugne & Dimon — 7 August 2027',
     description:
-      'Ugne and Dimon are getting married on 7 August 2027 at the Church of St. George in Vilkija, with the celebration at Babtyno dvaras, near Kaunas, Lithuania. The day, the menu, travel and RSVP.',
+      'Ugne and Dimon are getting married on 7 August 2027 at the Church of St. George in Vilkija, with the celebration at Babtyno dvaras, near Kaunas, Lithuania. The day, travel and RSVP.',
   },
   a11y: {
     skip: 'Skip to content',
@@ -421,7 +421,7 @@ const es = {
   meta: {
     title: 'Ugne & Dimon — 7 de agosto de 2027',
     description:
-      'Ugne y Dimon se casan el 7 de agosto de 2027 en la iglesia de San Jorge de Vilkija y lo celebran en Babtyno dvaras, cerca de Kaunas (Lituania). El día, el menú, cómo llegar y confirmación de asistencia.',
+      'Ugne y Dimon se casan el 7 de agosto de 2027 en la iglesia de San Jorge de Vilkija y lo celebran en Babtyno dvaras, cerca de Kaunas (Lituania). El día, cómo llegar y confirmación de asistencia.',
   },
   a11y: {
     skip: 'Saltar al contenido',
@@ -818,7 +818,7 @@ const lt = {
   meta: {
     title: 'Ugnė & Dimon — 2027 m. rugpjūčio 7 d.',
     description:
-      'Ugnė ir Dimon tuokiasi 2027 m. rugpjūčio 7 d. Vilkijos Šv. Jurgio bažnyčioje, o šventė tęsis Babtyno dvare, netoli Kauno. Šventės programa, meniu, kelionė ir dalyvavimo patvirtinimas.',
+      'Ugnė ir Dimon tuokiasi 2027 m. rugpjūčio 7 d. Vilkijos Šv. Jurgio bažnyčioje, o šventė tęsis Babtyno dvare, netoli Kauno. Šventės programa, kelionė ir dalyvavimo patvirtinimas.',
   },
   a11y: {
     skip: 'Pereiti prie turinio',
@@ -1215,7 +1215,7 @@ const uk = {
   meta: {
     title: 'Угне та Дімон — 7 серпня 2027',
     description:
-      'Угне та Дімон вінчаються 7 серпня 2027 року в костелі Святого Юрія у Вількії, а святкування продовжиться в маєтку Babtyno dvaras поблизу Каунаса, Литва. Програма дня, меню, дорога та підтвердження присутності.',
+      'Угне та Дімон вінчаються 7 серпня 2027 року в костелі Святого Юрія у Вількії, а святкування продовжиться в маєтку Babtyno dvaras поблизу Каунаса, Литва. Програма дня, дорога та підтвердження присутності.',
   },
   a11y: {
     skip: 'Перейти до вмісту',

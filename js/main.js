@@ -594,10 +594,19 @@ setups.push(() => scrollTasks.push(updateJourney));
 
 /* ───────────────────────────── Menu ───────────────────────────── */
 
+// Optional sections (CONFIG.sections): the section and its nav link carry data-section and
+// start hidden in the markup, so a switched-off section never flashes in.
+renderers.push(() => {
+  $$('[data-section]').forEach((node) => {
+    node.hidden = !CONFIG.sections?.[node.dataset.section];
+  });
+});
+
 const dietTag = (tag) =>
   `<span class="tag" title="${esc(t(`menu.tags.${tag}`))}"><span aria-hidden="true">${tag}</span><span class="sr-only">${esc(t(`menu.tags.${tag}`))}</span></span>`;
 
 renderers.push(() => {
+  if (!CONFIG.sections?.menu) return;
   $('[data-menu-sample]').hidden = !CONFIG.menu.isSample;
 
   $('[data-menu]').innerHTML = CONFIG.menu.courses
