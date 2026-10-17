@@ -133,7 +133,7 @@ Two things to know before going live:
 - [ ] Programme times confirmed, then `timesConfirmed: true`
 - [ ] Final menu, then `menu.isSample: false` and `sections.menu: true`
 - [ ] RSVP deadline confirmed and a real `rsvp.backend` configured and tested
-- [ ] Bank details (`gifts`) and contact email (`contact.email`)
+- [ ] Account holder in `gifts` confirmed against the CaixaBank account, and contact email (`contact.email`)
 - [ ] Placeholder texts replaced: plus-ones, parking, ceremony language,
       accommodation, shuttle, locations within the estate (all in `js/i18n.js`)
 - [ ] Translations read by a native speaker

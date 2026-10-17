@@ -180,12 +180,13 @@ export const CONFIG = {
     },
   },
 
-  // PLACEHOLDERS — replace with the real bank details.
+  // Bank details for a transfer. The IBAN passes the mod-97 check; it is shown with spaces
+  // and copied without them. PLACEHOLDER to confirm: the account holder must match the account.
   gifts: {
     accountHolder: 'Ugne Balaseviciute & Dimon Bortnyk',
-    iban: 'LT00 0000 0000 0000 0000',
-    bic: 'XXXXLT00',
-    bank: 'Bank name TBC',
+    iban: 'ES49 2100 0874 4102 0053 5436',
+    bic: 'CAIXESBBXXX',
+    bank: 'CaixaBank, S.A.',
     reference: 'Wedding U&D + your name',
   },
 
