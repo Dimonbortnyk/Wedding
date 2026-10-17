@@ -23,7 +23,7 @@ const en = {
   meta: {
     title: 'Ugne & Dimon — 7 August 2027',
     description:
-      'Ugne and Dimon are getting married on 7 August 2027 at Babtyno dvaras, near Kaunas, Lithuania. The day, the menu, travel and RSVP.',
+      'Ugne and Dimon are getting married on 7 August 2027 at the Church of St. George in Vilkija, with the celebration at Babtyno dvaras, near Kaunas, Lithuania. The day, the menu, travel and RSVP.',
   },
   a11y: {
     skip: 'Skip to content',
@@ -47,7 +47,7 @@ const en = {
     saveTheDate: 'Save the Date',
     // The date itself comes from config.js; this only sets the order and the separators.
     dateFormat: '{dd} · {mm} · {yyyy}',
-    place: 'Babtyno dvaras • Kaunas, Lithuania',
+    place: 'Vilkija & Babtyno dvaras • Lithuania',
     open: 'Open invitation',
     sealLabel: 'Open the envelope',
     sealHint: 'Tap the heart to open',
@@ -56,7 +56,7 @@ const en = {
   },
   letter: {
     title: 'We’re getting married!',
-    body: 'On the 7th of August 2027 we would love to share a very special day with you at Babtyno dvaras, Kaunas, Lithuania — where a love story between two cultures comes together as one, our own Pangea.',
+    body: 'On the 7th of August 2027 we would love to share a very special day with you. We will marry at the Church of St. George in Vilkija and celebrate at Babtyno dvaras, near Kaunas, Lithuania — where a love story between two cultures comes together as one, our own Pangea.',
     closing: 'We invite you to discover our love story.',
     signature: 'Ugne & Dimon',
     cta: 'Discover our story',
@@ -85,9 +85,9 @@ const en = {
         alt: 'Ugne and Dimon by the lake in Trakai',
       },
       forever: {
-        place: 'Kaunas',
+        place: 'Vilkija & Babtyno dvaras',
         title: 'Forever begins',
-        text: 'Forever begins at Babtyno dvaras, surrounded by family and friends from every corner of Europe.',
+        text: 'Forever begins at the Church of St. George in Vilkija and carries on at Babtyno dvaras, surrounded by family and friends from every corner of Europe.',
         alt: 'Ugne and Dimon',
       },
     },
@@ -124,47 +124,52 @@ const en = {
   programme: {
     label: 'The celebration',
     title: 'The Day',
-    intro: 'From the first hello to the last dance — here is how the day will unfold.',
+    intro: 'From the church in Vilkija to the last dance at Babtyno dvaras — here is how the day will unfold.',
     tbc: 'Times to be confirmed',
     momentsTitle: 'The main moments',
     steps: {
       arrival: {
-        title: 'Arrival & welcome',
-        desc: 'Find your way to Babtyno dvaras, say your hellos and settle in with something cool to drink.',
-        where: 'Manor courtyard',
+        title: 'Arrival at the church',
+        desc: 'Please come in good time, so you are seated before we arrive.',
+        where: 'Church of St. George, Vilkija',
       },
       ceremony: {
-        title: 'The ceremony',
-        desc: 'We say “yes”, surrounded by the people we love most.',
-        where: 'Manor park',
-        highlight: 'We say yes',
+        title: 'The church ceremony',
+        desc: 'We say “yes” in church, surrounded by the people we love most.',
+        where: 'Church of St. George, Vilkija',
+        highlight: 'We say yes at St. George’s',
+      },
+      transfer: {
+        title: 'Transfer to Babtyno dvaras',
+        desc: 'From Vilkija we all head on to the manor. Transport is still to be confirmed — the details will be posted here.',
+        where: 'Vilkija → Babtyno dvaras',
       },
       breadSalt: {
         title: 'Bread & salt',
-        desc: 'The traditional welcome of the newlyweds — a custom Lithuania and Ukraine share.',
-        where: 'Manor steps',
+        desc: 'The traditional welcome of the newlyweds at the manor — a custom Lithuania and Ukraine share.',
+        where: 'Babtyno dvaras — manor steps',
       },
       cava: {
         title: 'Cava toast, canapés & photos',
         desc: 'A glass of cava for Barcelona, something to nibble and plenty of photos in the gardens.',
-        where: 'The gardens',
+        where: 'Babtyno dvaras — the gardens',
         highlight: 'A toast to Barcelona',
       },
       banquet: {
         title: 'The banquet',
         desc: 'Dinner from both our kitchens, with a few toasts along the way.',
-        where: 'Banquet hall',
+        where: 'Babtyno dvaras — banquet hall',
         highlight: 'Two cuisines, one table',
       },
       firstDance: {
         title: 'First dance',
         desc: 'We open the dance floor — then it is all yours.',
-        where: 'Banquet hall',
+        where: 'Babtyno dvaras — banquet hall',
       },
       party: {
         title: 'The party',
         desc: 'Dancing until late, with a midnight snack to keep you going.',
-        where: 'Banquet hall',
+        where: 'Babtyno dvaras — banquet hall',
         highlight: 'Dancing until late',
       },
     },
@@ -172,7 +177,7 @@ const en = {
       dress: {
         label: 'Dress code',
         title: 'Elegant summer attire',
-        text: 'Light fabrics and garden-friendly shoes — part of the day is out on the lawn.',
+        text: 'Light fabrics and garden-friendly shoes — the ceremony is in church, and part of the afternoon is out on the lawn.',
       },
       kids: {
         label: 'Children',
@@ -237,17 +242,25 @@ const en = {
   travel: {
     label: 'Getting there',
     title: 'Travel & Stay',
-    intro: 'Babtyno dvaras is a manor estate in Babtai, about 24 km north of Kaunas, in the heart of Lithuania.',
-    approx: 'Drive times are approximate — please check before you travel.',
+    intro: 'We marry at the Church of St. George in Vilkija, a small town on the Nemunas north-west of Kaunas, and celebrate at Babtyno dvaras, a manor estate in Babtai, about 24 km north of Kaunas, in the heart of Lithuania.',
+    between: 'The ceremony is at the church in Vilkija; the celebration continues at Babtyno dvaras. How to get from one to the other is still to be confirmed — we are looking into a shuttle.',
+    approx: 'Drive times are to Babtyno dvaras and approximate — please check before you travel.',
     drive: 'about {time} by car',
     hourShort: 'h',
     minuteShort: 'min',
     soon: 'Coming soon',
     tipsTitle: 'Good to know',
+    country: 'Lithuania',
+    mapLink: 'Open in Google Maps',
+    church: {
+      label: 'The ceremony',
+      name: 'Church of St. George',
+      mapTitle: 'Map of the Church of St. George, Vilkija',
+      alt: 'The Church of St. George in Vilkija',
+    },
     venue: {
-      label: 'The venue',
-      country: 'Lithuania',
-      mapLink: 'Open in Google Maps',
+      label: 'The celebration',
+      name: 'Babtyno dvaras',
       mapTitle: 'Map of Babtyno dvaras',
       alt: 'Babtyno dvaras manor',
     },
@@ -267,7 +280,7 @@ const en = {
     },
     shuttle: {
       title: 'Shuttle',
-      text: 'We are looking into a shuttle between Kaunas and the venue. Tell us in the RSVP if you would use it.',
+      text: 'We are looking into a shuttle from Kaunas to the church, on to Babtyno dvaras and back at the end of the night. Tell us in the RSVP if you would use it.',
     },
     tips: {
       currency: { title: 'Currency', text: 'Lithuania uses the euro. Cards are accepted almost everywhere.' },
@@ -369,8 +382,12 @@ const en = {
         a: 'We are finalising the details and will update this page soon. If you are hoping to travel with little ones, mention it in your RSVP note.',
       },
       parking: {
-        q: 'Is there parking at the venue?',
-        a: 'We are confirming the parking arrangements with the venue and will post the details here.',
+        q: 'Is there parking at the church and the manor?',
+        a: 'We are confirming parking in Vilkija and at Babtyno dvaras and will post the details here.',
+      },
+      transfer: {
+        q: 'How do I get from the church to the manor?',
+        a: 'We are looking into a shuttle from the church in Vilkija to Babtyno dvaras and will confirm it here. If you are driving, both places are on Google Maps under Travel & Stay.',
       },
       weather: {
         q: 'What if it rains?',
@@ -378,7 +395,7 @@ const en = {
       },
       photos: {
         q: 'Can I take photos?',
-        a: 'We would love an unplugged ceremony: phones and cameras away, so everyone is truly there with us. Our photographer will capture it all — and once the ceremony is over, snap away.',
+        a: 'We would love an unplugged church ceremony: phones and cameras away, so everyone is truly there with us. Our photographer will capture it all — and once the ceremony is over, snap away.',
       },
       language: {
         q: 'What language will the ceremony be in?',
@@ -404,7 +421,7 @@ const es = {
   meta: {
     title: 'Ugne & Dimon — 7 de agosto de 2027',
     description:
-      'Ugne y Dimon se casan el 7 de agosto de 2027 en Babtyno dvaras, cerca de Kaunas (Lituania). El día, el menú, cómo llegar y confirmación de asistencia.',
+      'Ugne y Dimon se casan el 7 de agosto de 2027 en la iglesia de San Jorge de Vilkija y lo celebran en Babtyno dvaras, cerca de Kaunas (Lituania). El día, el menú, cómo llegar y confirmación de asistencia.',
   },
   a11y: {
     skip: 'Saltar al contenido',
@@ -427,7 +444,7 @@ const es = {
     and: 'y',
     saveTheDate: 'Reserva la fecha',
     dateFormat: '{dd} · {mm} · {yyyy}',
-    place: 'Babtyno dvaras • Kaunas, Lituania',
+    place: 'Vilkija y Babtyno dvaras • Lituania',
     open: 'Abrir invitación',
     sealLabel: 'Abrir el sobre',
     sealHint: 'Toca el corazón para abrir',
@@ -436,7 +453,7 @@ const es = {
   },
   letter: {
     title: '¡Nos casamos!',
-    body: 'El próximo 7 de agosto de 2027 nos encantaría compartir contigo un día muy especial en Babtyno dvaras, Kaunas, Lituania, donde una historia de amor entre dos culturas se une para formar una sola: nuestra propia Pangea.',
+    body: 'El próximo 7 de agosto de 2027 nos encantaría compartir contigo un día muy especial. Nos casaremos en la iglesia de San Jorge de Vilkija y lo celebraremos en Babtyno dvaras, cerca de Kaunas (Lituania), donde una historia de amor entre dos culturas se une para formar una sola: nuestra propia Pangea.',
     closing: 'Te invitamos a descubrir nuestra historia de amor.',
     signature: 'Ugne & Dimon',
     cta: 'Descubre nuestra historia',
@@ -465,9 +482,9 @@ const es = {
         alt: 'Ugne y Dimon junto al lago en Trakai',
       },
       forever: {
-        place: 'Kaunas',
+        place: 'Vilkija y Babtyno dvaras',
         title: 'Empieza el para siempre',
-        text: 'El para siempre empieza en Babtyno dvaras, rodeados de familia y amigos llegados de todos los rincones de Europa.',
+        text: 'El para siempre empieza en la iglesia de San Jorge de Vilkija y sigue en Babtyno dvaras, rodeados de familia y amigos llegados de todos los rincones de Europa.',
         alt: 'Ugne y Dimon',
       },
     },
@@ -504,47 +521,52 @@ const es = {
   programme: {
     label: 'La celebración',
     title: 'El día',
-    intro: 'Del primer saludo al último baile: así será el día.',
+    intro: 'De la iglesia de Vilkija al último baile en Babtyno dvaras: así será el día.',
     tbc: 'Horarios por confirmar',
     momentsTitle: 'Los grandes momentos',
     steps: {
       arrival: {
-        title: 'Llegada y bienvenida',
-        desc: 'Llega a Babtyno dvaras, saluda a todo el mundo y ponte cómodo con algo fresco para beber.',
-        where: 'Patio de la mansión',
+        title: 'Llegada a la iglesia',
+        desc: 'Ven con tiempo para estar ya sentado cuando lleguemos nosotros.',
+        where: 'Iglesia de San Jorge, Vilkija',
       },
       ceremony: {
-        title: 'La ceremonia',
-        desc: 'Nos damos el «sí» rodeados de las personas que más queremos.',
-        where: 'Parque de la mansión',
-        highlight: 'Nos damos el sí',
+        title: 'La ceremonia en la iglesia',
+        desc: 'Nos damos el «sí» en la iglesia, rodeados de las personas que más queremos.',
+        where: 'Iglesia de San Jorge, Vilkija',
+        highlight: 'Nos damos el sí en San Jorge',
+      },
+      transfer: {
+        title: 'Traslado a Babtyno dvaras',
+        desc: 'Desde Vilkija vamos todos a la mansión. El transporte está por confirmar; publicaremos aquí los detalles.',
+        where: 'Vilkija → Babtyno dvaras',
       },
       breadSalt: {
         title: 'Pan y sal',
-        desc: 'La bienvenida tradicional a los recién casados, una costumbre que Lituania y Ucrania comparten.',
-        where: 'Escalinata de la mansión',
+        desc: 'La bienvenida tradicional a los recién casados en la mansión, una costumbre que Lituania y Ucrania comparten.',
+        where: 'Babtyno dvaras — escalinata de la mansión',
       },
       cava: {
         title: 'Brindis con cava, canapés y fotos',
         desc: 'Una copa de cava por Barcelona, algo para picar y muchas fotos en los jardines.',
-        where: 'Los jardines',
+        where: 'Babtyno dvaras — los jardines',
         highlight: 'Un brindis por Barcelona',
       },
       banquet: {
         title: 'El banquete',
         desc: 'Una cena con lo mejor de nuestras dos cocinas y algún que otro brindis.',
-        where: 'Salón de banquetes',
+        where: 'Babtyno dvaras — salón de banquetes',
         highlight: 'Dos cocinas, una mesa',
       },
       firstDance: {
         title: 'Primer baile',
         desc: 'Abrimos la pista de baile… y después, todos a bailar.',
-        where: 'Salón de banquetes',
+        where: 'Babtyno dvaras — salón de banquetes',
       },
       party: {
         title: 'La fiesta',
         desc: 'A bailar hasta tarde, con un tentempié de medianoche para reponer fuerzas.',
-        where: 'Salón de banquetes',
+        where: 'Babtyno dvaras — salón de banquetes',
         highlight: 'A bailar hasta tarde',
       },
     },
@@ -552,7 +574,7 @@ const es = {
       dress: {
         label: 'Código de vestimenta',
         title: 'Elegante de verano',
-        text: 'Tejidos ligeros y zapatos aptos para el jardín: parte del día transcurre sobre el césped.',
+        text: 'Tejidos ligeros y zapatos aptos para el jardín: la ceremonia es en la iglesia y parte de la tarde transcurre sobre el césped.',
       },
       kids: {
         label: 'Niños',
@@ -616,17 +638,25 @@ const es = {
   travel: {
     label: 'Cómo llegar',
     title: 'Viaje y alojamiento',
-    intro: 'Babtyno dvaras es una mansión señorial en Babtai, a unos 24 km al norte de Kaunas, en el corazón de Lituania.',
-    approx: 'Los tiempos en coche son aproximados; compruébalos antes de viajar.',
+    intro: 'Nos casamos en la iglesia de San Jorge de Vilkija, un pueblo a orillas del Nemunas al noroeste de Kaunas, y lo celebramos en Babtyno dvaras, una mansión señorial en Babtai, a unos 24 km al norte de Kaunas, en el corazón de Lituania.',
+    between: 'La ceremonia es en la iglesia de Vilkija y la celebración continúa en Babtyno dvaras. Cómo ir de un sitio a otro está por confirmar: estamos estudiando un servicio de traslado.',
+    approx: 'Los tiempos en coche son hasta Babtyno dvaras y aproximados; compruébalos antes de viajar.',
     drive: 'unos {time} en coche',
     hourShort: 'h',
     minuteShort: 'min',
     soon: 'Próximamente',
     tipsTitle: 'Conviene saber',
+    country: 'Lituania',
+    mapLink: 'Abrir en Google Maps',
+    church: {
+      label: 'La ceremonia',
+      name: 'Iglesia de San Jorge',
+      mapTitle: 'Mapa de la iglesia de San Jorge, Vilkija',
+      alt: 'La iglesia de San Jorge de Vilkija',
+    },
     venue: {
-      label: 'El lugar',
-      country: 'Lituania',
-      mapLink: 'Abrir en Google Maps',
+      label: 'La celebración',
+      name: 'Babtyno dvaras',
       mapTitle: 'Mapa de Babtyno dvaras',
       alt: 'La mansión Babtyno dvaras',
     },
@@ -646,7 +676,7 @@ const es = {
     },
     shuttle: {
       title: 'Traslado',
-      text: 'Estamos estudiando un servicio de traslado entre Kaunas y el lugar de la boda. Dinos al confirmar si lo usarías.',
+      text: 'Estamos estudiando un traslado desde Kaunas a la iglesia, de allí a Babtyno dvaras y de vuelta al final de la noche. Dinos al confirmar si lo usarías.',
     },
     tips: {
       currency: { title: 'Moneda', text: 'En Lituania se usa el euro. Se puede pagar con tarjeta en casi todas partes.' },
@@ -748,8 +778,12 @@ const es = {
         a: 'Estamos cerrando los detalles y actualizaremos esta página pronto. Si piensas viajar con peques, coméntalo en la nota de tu confirmación.',
       },
       parking: {
-        q: '¿Hay aparcamiento?',
-        a: 'Estamos confirmando el aparcamiento con el lugar de la boda y publicaremos aquí los detalles.',
+        q: '¿Hay aparcamiento en la iglesia y en la mansión?',
+        a: 'Estamos confirmando el aparcamiento en Vilkija y en Babtyno dvaras y publicaremos aquí los detalles.',
+      },
+      transfer: {
+        q: '¿Cómo voy de la iglesia a la mansión?',
+        a: 'Estamos estudiando un traslado de la iglesia de Vilkija a Babtyno dvaras y lo confirmaremos aquí. Si vas en coche, encontrarás los dos lugares en Google Maps en «Viaje y alojamiento».',
       },
       weather: {
         q: '¿Y si llueve?',
@@ -757,7 +791,7 @@ const es = {
       },
       photos: {
         q: '¿Puedo hacer fotos?',
-        a: 'Nos encantaría una ceremonia sin móviles ni cámaras, para que todos estemos de verdad presentes. Nuestro fotógrafo lo captará todo y, en cuanto termine la ceremonia, ¡a hacer fotos!',
+        a: 'Nos encantaría una ceremonia en la iglesia sin móviles ni cámaras, para que todos estemos de verdad presentes. Nuestro fotógrafo lo captará todo y, en cuanto termine la ceremonia, ¡a hacer fotos!',
       },
       language: {
         q: '¿En qué idioma será la ceremonia?',
@@ -784,7 +818,7 @@ const lt = {
   meta: {
     title: 'Ugnė & Dimon — 2027 m. rugpjūčio 7 d.',
     description:
-      'Ugnė ir Dimon tuokiasi 2027 m. rugpjūčio 7 d. Babtyno dvare, netoli Kauno. Šventės programa, meniu, kelionė ir dalyvavimo patvirtinimas.',
+      'Ugnė ir Dimon tuokiasi 2027 m. rugpjūčio 7 d. Vilkijos Šv. Jurgio bažnyčioje, o šventė tęsis Babtyno dvare, netoli Kauno. Šventės programa, meniu, kelionė ir dalyvavimo patvirtinimas.',
   },
   a11y: {
     skip: 'Pereiti prie turinio',
@@ -807,7 +841,7 @@ const lt = {
     and: 'ir',
     saveTheDate: 'Išsaugokite datą',
     dateFormat: '{dd} · {mm} · {yyyy}',
-    place: 'Babtyno dvaras • Kaunas, Lietuva',
+    place: 'Vilkija ir Babtyno dvaras • Lietuva',
     open: 'Atverti kvietimą',
     sealLabel: 'Atverti voką',
     sealHint: 'Palieskite širdelę, kad atvertumėte',
@@ -816,7 +850,7 @@ const lt = {
   },
   letter: {
     title: 'Mes tuokiamės!',
-    body: '2027 m. rugpjūčio 7 d. labai norėtume kartu su jumis praleisti ypatingą dieną Babtyno dvare, Kauno rajone, Lietuvoje — ten, kur dviejų kultūrų meilės istorija susilieja į vieną: mūsų pačių Pangėją.',
+    body: '2027 m. rugpjūčio 7 d. labai norėtume kartu su jumis praleisti ypatingą dieną. Susituoksime Vilkijos Šv. Jurgio bažnyčioje, o švęsime Babtyno dvare, Kauno rajone, — ten, kur dviejų kultūrų meilės istorija susilieja į vieną: mūsų pačių Pangėją.',
     closing: 'Kviečiame atrasti mūsų meilės istoriją.',
     signature: 'Ugnė & Dimon',
     cta: 'Atraskite mūsų istoriją',
@@ -845,9 +879,9 @@ const lt = {
         alt: 'Ugnė ir Dimon prie ežero Trakuose',
       },
       forever: {
-        place: 'Kaunas',
+        place: 'Vilkija ir Babtyno dvaras',
         title: 'Prasideda amžinybė',
-        text: 'Amžinybė prasideda Babtyno dvare, apsuptyje šeimos ir draugų iš visų Europos kampelių.',
+        text: 'Amžinybė prasideda Vilkijos Šv. Jurgio bažnyčioje ir tęsiasi Babtyno dvare, apsuptyje šeimos ir draugų iš visų Europos kampelių.',
         alt: 'Ugnė ir Dimon',
       },
     },
@@ -884,47 +918,52 @@ const lt = {
   programme: {
     label: 'Šventė',
     title: 'Šventės diena',
-    intro: 'Nuo pirmojo pasisveikinimo iki paskutinio šokio — štai kaip atrodys diena.',
+    intro: 'Nuo bažnyčios Vilkijoje iki paskutinio šokio Babtyno dvare — štai kaip atrodys diena.',
     tbc: 'Laikas bus patikslintas',
     momentsTitle: 'Svarbiausios akimirkos',
     steps: {
       arrival: {
-        title: 'Atvykimas ir sutikimas',
-        desc: 'Atvykite į Babtyno dvarą, pasisveikinkite ir įsitaisykite su gaiviu gėrimu.',
-        where: 'Dvaro kiemas',
+        title: 'Atvykimas į bažnyčią',
+        desc: 'Atvykite šiek tiek anksčiau, kad spėtumėte atsisėsti prieš mums atvykstant.',
+        where: 'Šv. Jurgio bažnyčia, Vilkija',
       },
       ceremony: {
-        title: 'Ceremonija',
-        desc: 'Sakome „taip“ apsupti brangiausių žmonių.',
-        where: 'Dvaro parkas',
-        highlight: 'Sakome „taip“',
+        title: 'Sutuoktuvės bažnyčioje',
+        desc: 'Bažnyčioje sakome „taip“ apsupti brangiausių žmonių.',
+        where: 'Šv. Jurgio bažnyčia, Vilkija',
+        highlight: 'Sakome „taip“ Šv. Jurgio bažnyčioje',
+      },
+      transfer: {
+        title: 'Kelionė į Babtyno dvarą',
+        desc: 'Iš Vilkijos visi keliaujame į dvarą. Transportas dar bus patikslintas — informaciją paskelbsime čia.',
+        where: 'Vilkija → Babtyno dvaras',
       },
       breadSalt: {
         title: 'Duona ir druska',
-        desc: 'Tradicinis jaunavedžių sutikimas — paprotys, bendras Lietuvai ir Ukrainai.',
-        where: 'Dvaro laiptai',
+        desc: 'Tradicinis jaunavedžių sutikimas dvare — paprotys, bendras Lietuvai ir Ukrainai.',
+        where: 'Babtyno dvaras — dvaro laiptai',
       },
       cava: {
         title: '„Cava“ tostas, užkandžiai ir nuotraukos',
         desc: 'Taurė „cava“ už Barseloną, lengvi užkandžiai ir daug nuotraukų sode.',
-        where: 'Sodas',
+        where: 'Babtyno dvaras — sodas',
         highlight: 'Tostas už Barseloną',
       },
       banquet: {
         title: 'Vakarienė',
         desc: 'Vakarienė, kurioje susitinka abi mūsų virtuvės, ir keli tostai.',
-        where: 'Pokylių salė',
+        where: 'Babtyno dvaras — pokylių salė',
         highlight: 'Dvi virtuvės, vienas stalas',
       },
       firstDance: {
         title: 'Pirmasis šokis',
         desc: 'Atidarome šokių aikštelę — o tada ji jūsų.',
-        where: 'Pokylių salė',
+        where: 'Babtyno dvaras — pokylių salė',
       },
       party: {
         title: 'Vakarėlis',
         desc: 'Šokiai iki vėlumos ir vidurnakčio užkandis jėgoms atgauti.',
-        where: 'Pokylių salė',
+        where: 'Babtyno dvaras — pokylių salė',
         highlight: 'Šokiai iki vėlumos',
       },
     },
@@ -932,7 +971,7 @@ const lt = {
       dress: {
         label: 'Aprangos kodas',
         title: 'Elegantiška vasariška apranga',
-        text: 'Lengvi audiniai ir žolei tinkama avalynė — dalis šventės vyks pievoje.',
+        text: 'Lengvi audiniai ir žolei tinkama avalynė — ceremonija vyks bažnyčioje, o dalis popietės — pievoje.',
       },
       kids: {
         label: 'Vaikai',
@@ -996,17 +1035,25 @@ const lt = {
   travel: {
     label: 'Kaip atvykti',
     title: 'Kelionė ir nakvynė',
-    intro: 'Babtyno dvaras — dvaro sodyba Babtuose, apie 24 km į šiaurę nuo Kauno, pačioje Lietuvos širdyje.',
-    approx: 'Kelionės laikas apytikslis — prieš kelionę pasitikrinkite.',
+    intro: 'Susituoksime Vilkijos Šv. Jurgio bažnyčioje — Vilkija yra nedidelis miestelis prie Nemuno, į šiaurės vakarus nuo Kauno, — o švęsime Babtyno dvare, Babtuose, apie 24 km į šiaurę nuo Kauno, pačioje Lietuvos širdyje.',
+    between: 'Ceremonija vyks Vilkijos bažnyčioje, o šventė tęsis Babtyno dvare. Kaip nuvykti iš vienos vietos į kitą, dar bus patikslinta — svarstome organizuoti autobusą.',
+    approx: 'Kelionės laikas nurodytas iki Babtyno dvaro ir yra apytikslis — prieš kelionę pasitikrinkite.',
     drive: 'apie {time} automobiliu',
     hourShort: 'val.',
     minuteShort: 'min.',
     soon: 'Jau netrukus',
     tipsTitle: 'Naudinga žinoti',
+    country: 'Lietuva',
+    mapLink: 'Atidaryti „Google Maps“',
+    church: {
+      label: 'Ceremonija',
+      name: 'Šv. Jurgio bažnyčia',
+      mapTitle: 'Vilkijos Šv. Jurgio bažnyčios žemėlapis',
+      alt: 'Vilkijos Šv. Jurgio bažnyčia',
+    },
     venue: {
-      label: 'Šventės vieta',
-      country: 'Lietuva',
-      mapLink: 'Atidaryti „Google Maps“',
+      label: 'Šventė',
+      name: 'Babtyno dvaras',
       mapTitle: 'Babtyno dvaro žemėlapis',
       alt: 'Babtyno dvaras',
     },
@@ -1026,7 +1073,7 @@ const lt = {
     },
     shuttle: {
       title: 'Autobusas',
-      text: 'Svarstome organizuoti autobusą tarp Kauno ir dvaro. Patvirtindami dalyvavimą parašykite, ar juo naudotumėtės.',
+      text: 'Svarstome organizuoti autobusą iš Kauno į bažnyčią, iš ten į Babtyno dvarą ir atgal šventės pabaigoje. Patvirtindami dalyvavimą parašykite, ar juo naudotumėtės.',
     },
     tips: {
       currency: { title: 'Valiuta', text: 'Lietuvoje atsiskaitoma eurais. Kortelės priimamos beveik visur.' },
@@ -1128,8 +1175,12 @@ const lt = {
         a: 'Dar deriname detales ir netrukus atnaujinsime šį puslapį. Jei planuojate keliauti su mažaisiais, paminėkite tai atsakymo žinutėje.',
       },
       parking: {
-        q: 'Ar prie dvaro yra automobilių stovėjimo aikštelė?',
-        a: 'Su dvaru dar deriname stovėjimo vietas — informaciją paskelbsime čia.',
+        q: 'Ar prie bažnyčios ir dvaro galima pasistatyti automobilį?',
+        a: 'Dar deriname stovėjimo vietas Vilkijoje ir Babtyno dvare — informaciją paskelbsime čia.',
+      },
+      transfer: {
+        q: 'Kaip nuvykti iš bažnyčios į dvarą?',
+        a: 'Svarstome organizuoti autobusą iš Vilkijos bažnyčios į Babtyno dvarą — informaciją paskelbsime čia. Jei vyksite automobiliu, abi vietas „Google Maps“ rasite skiltyje „Kelionė ir nakvynė“.',
       },
       weather: {
         q: 'O jeigu lis?',
@@ -1137,7 +1188,7 @@ const lt = {
       },
       photos: {
         q: 'Ar galiu fotografuoti?',
-        a: 'Norėtume, kad ceremonija vyktų be telefonų ir fotoaparatų — kad visi iš tikrųjų būtume kartu. Mūsų fotografas viską įamžins, o po ceremonijos fotografuokite kiek širdis geidžia.',
+        a: 'Norėtume, kad ceremonija bažnyčioje vyktų be telefonų ir fotoaparatų — kad visi iš tikrųjų būtume kartu. Mūsų fotografas viską įamžins, o po ceremonijos fotografuokite kiek širdis geidžia.',
       },
       language: {
         q: 'Kokia kalba vyks ceremonija?',
@@ -1164,7 +1215,7 @@ const uk = {
   meta: {
     title: 'Угне та Дімон — 7 серпня 2027',
     description:
-      'Угне та Дімон одружуються 7 серпня 2027 року в маєтку Babtyno dvaras поблизу Каунаса, Литва. Програма дня, меню, дорога та підтвердження присутності.',
+      'Угне та Дімон вінчаються 7 серпня 2027 року в костелі Святого Юрія у Вількії, а святкування продовжиться в маєтку Babtyno dvaras поблизу Каунаса, Литва. Програма дня, меню, дорога та підтвердження присутності.',
   },
   a11y: {
     skip: 'Перейти до вмісту',
@@ -1187,7 +1238,7 @@ const uk = {
     and: 'та',
     saveTheDate: 'Збережіть дату',
     dateFormat: '{dd} · {mm} · {yyyy}',
-    place: 'Babtyno dvaras • Каунас, Литва',
+    place: 'Вількія та Babtyno dvaras • Литва',
     open: 'Відкрити запрошення',
     sealLabel: 'Відкрити конверт',
     sealHint: 'Торкніться серця, щоб відкрити',
@@ -1196,7 +1247,7 @@ const uk = {
   },
   letter: {
     title: 'Ми одружуємося!',
-    body: '7 серпня 2027 року ми будемо раді розділити з вами дуже особливий день у маєтку Babtyno dvaras, Каунас, Литва, — там, де історія кохання двох культур зливається в одну: нашу власну Пангею.',
+    body: '7 серпня 2027 року ми будемо раді розділити з вами дуже особливий день. Ми повінчаємося в костелі Святого Юрія у Вількії, а святкуватимемо в маєтку Babtyno dvaras поблизу Каунаса, Литва, — там, де історія кохання двох культур зливається в одну: нашу власну Пангею.',
     closing: 'Запрошуємо вас відкрити нашу історію кохання.',
     signature: 'Угне & Дімон',
     cta: 'Відкрийте нашу історію',
@@ -1225,9 +1276,9 @@ const uk = {
         alt: 'Угне та Дімон біля озера в Тракаї',
       },
       forever: {
-        place: 'Каунас',
+        place: 'Вількія та Babtyno dvaras',
         title: '«Назавжди» починається',
-        text: '«Назавжди» починається в Babtyno dvaras, в оточенні рідних і друзів з усіх куточків Європи.',
+        text: '«Назавжди» починається в костелі Святого Юрія у Вількії й продовжується в Babtyno dvaras, в оточенні рідних і друзів з усіх куточків Європи.',
         alt: 'Угне та Дімон',
       },
     },
@@ -1264,47 +1315,52 @@ const uk = {
   programme: {
     label: 'Святкування',
     title: 'Програма дня',
-    intro: 'Від першого привітання до останнього танцю — ось як мине цей день.',
+    intro: 'Від костелу у Вількії до останнього танцю в Babtyno dvaras — ось як мине цей день.',
     tbc: 'Час уточнюється',
     momentsTitle: 'Головні моменти',
     steps: {
       arrival: {
-        title: 'Прибуття та зустріч гостей',
-        desc: 'Приїжджайте до Babtyno dvaras, вітайтеся й влаштовуйтеся з прохолодним напоєм.',
-        where: 'Подвір’я маєтку',
+        title: 'Прибуття до костелу',
+        desc: 'Приїжджайте трохи раніше, щоб устигнути сісти до нашого приїзду.',
+        where: 'Костел Святого Юрія, Вількія',
       },
       ceremony: {
-        title: 'Церемонія',
-        desc: 'Ми кажемо «так» в оточенні найдорожчих людей.',
-        where: 'Парк маєтку',
-        highlight: 'Ми кажемо «так»',
+        title: 'Вінчання',
+        desc: 'Ми кажемо «так» у костелі, в оточенні найдорожчих людей.',
+        where: 'Костел Святого Юрія, Вількія',
+        highlight: 'Ми кажемо «так» у костелі Святого Юрія',
+      },
+      transfer: {
+        title: 'Переїзд до Babtyno dvaras',
+        desc: 'З Вількії ми всі вирушаємо до маєтку. Транспорт ще уточнюється — деталі з’являться тут.',
+        where: 'Вількія → Babtyno dvaras',
       },
       breadSalt: {
         title: 'Хліб і сіль',
-        desc: 'Традиційна зустріч молодят — звичай, спільний для Литви та України.',
-        where: 'Сходи маєтку',
+        desc: 'Традиційна зустріч молодят у маєтку — звичай, спільний для Литви та України.',
+        where: 'Babtyno dvaras — сходи маєтку',
       },
       cava: {
         title: 'Тост із cava, канапе та фото',
         desc: 'Келих cava за Барселону, легкі закуски та багато фотографій у саду.',
-        where: 'Сад',
+        where: 'Babtyno dvaras — сад',
         highlight: 'Тост за Барселону',
       },
       banquet: {
         title: 'Банкет',
         desc: 'Вечеря з найкращим із наших двох кухонь і кілька тостів.',
-        where: 'Банкетна зала',
+        where: 'Babtyno dvaras — банкетна зала',
         highlight: 'Дві кухні, один стіл',
       },
       firstDance: {
         title: 'Перший танець',
         desc: 'Ми відкриваємо танцмайданчик — а далі він ваш.',
-        where: 'Банкетна зала',
+        where: 'Babtyno dvaras — банкетна зала',
       },
       party: {
         title: 'Вечірка',
         desc: 'Танці допізна й опівнічний перекус, щоб вистачило сил.',
-        where: 'Банкетна зала',
+        where: 'Babtyno dvaras — банкетна зала',
         highlight: 'Танці допізна',
       },
     },
@@ -1312,7 +1368,7 @@ const uk = {
       dress: {
         label: 'Дрес-код',
         title: 'Елегантне літнє вбрання',
-        text: 'Легкі тканини та взуття, зручне для саду: частина дня мине на галявині.',
+        text: 'Легкі тканини та взуття, зручне для саду: вінчання відбудеться в костелі, а частина дня мине на галявині.',
       },
       kids: {
         label: 'Діти',
@@ -1376,17 +1432,25 @@ const uk = {
   travel: {
     label: 'Як дістатися',
     title: 'Дорога та проживання',
-    intro: 'Babtyno dvaras — маєток у Бабтаї, приблизно за 24 км на північ від Каунаса, у самому серці Литви.',
-    approx: 'Час у дорозі приблизний — перевірте його перед поїздкою.',
+    intro: 'Ми вінчаємося в костелі Святого Юрія у Вількії — невеликому містечку на Німані, на північний захід від Каунаса, — а святкуємо в маєтку Babtyno dvaras у Бабтаї, приблизно за 24 км на північ від Каунаса, у самому серці Литви.',
+    between: 'Вінчання відбудеться в костелі у Вількії, а святкування продовжиться в Babtyno dvaras. Як дістатися з одного місця до іншого, ще уточнюється — ми розглядаємо трансфер.',
+    approx: 'Час у дорозі вказано до Babtyno dvaras, і він приблизний — перевірте його перед поїздкою.',
     drive: 'близько {time} автомобілем',
     hourShort: 'год',
     minuteShort: 'хв',
     soon: 'Незабаром',
     tipsTitle: 'Корисно знати',
+    country: 'Литва',
+    mapLink: 'Відкрити в Google Maps',
+    church: {
+      label: 'Вінчання',
+      name: 'Костел Святого Юрія',
+      mapTitle: 'Мапа костелу Святого Юрія у Вількії',
+      alt: 'Костел Святого Юрія у Вількії',
+    },
     venue: {
-      label: 'Місце святкування',
-      country: 'Литва',
-      mapLink: 'Відкрити в Google Maps',
+      label: 'Святкування',
+      name: 'Babtyno dvaras',
       mapTitle: 'Мапа Babtyno dvaras',
       alt: 'Маєток Babtyno dvaras',
     },
@@ -1406,7 +1470,7 @@ const uk = {
     },
     shuttle: {
       title: 'Трансфер',
-      text: 'Ми розглядаємо можливість трансферу між Каунасом і маєтком. Напишіть у відповіді, чи скористалися б ви ним.',
+      text: 'Ми розглядаємо трансфер із Каунаса до костелу, звідти до Babtyno dvaras і назад наприкінці вечора. Напишіть у відповіді, чи скористалися б ви ним.',
     },
     tips: {
       currency: { title: 'Валюта', text: 'У Литві розраховуються в євро. Картки приймають майже всюди.' },
@@ -1508,8 +1572,12 @@ const uk = {
         a: 'Ми ще узгоджуємо деталі й невдовзі оновимо цю сторінку. Якщо плануєте їхати з малечею, згадайте про це в примітці до відповіді.',
       },
       parking: {
-        q: 'Чи є паркування біля маєтку?',
-        a: 'Ми уточнюємо в маєтку питання паркування й опублікуємо деталі тут.',
+        q: 'Чи є паркування біля костелу та маєтку?',
+        a: 'Ми уточнюємо питання паркування у Вількії та в Babtyno dvaras й опублікуємо деталі тут.',
+      },
+      transfer: {
+        q: 'Як дістатися від костелу до маєтку?',
+        a: 'Ми розглядаємо трансфер від костелу у Вількії до Babtyno dvaras і повідомимо про це тут. Якщо їдете автомобілем, обидва місця є в Google Maps у розділі «Дорога та проживання».',
       },
       weather: {
         q: 'А якщо піде дощ?',
@@ -1517,7 +1585,7 @@ const uk = {
       },
       photos: {
         q: 'Чи можна фотографувати?',
-        a: 'Ми хотіли б церемонію без телефонів і камер — щоб усі були по-справжньому поруч. Наш фотограф зніме все, а після церемонії фотографуйте скільки заманеться.',
+        a: 'Ми хотіли б вінчання без телефонів і камер — щоб усі були по-справжньому поруч. Наш фотограф зніме все, а після церемонії фотографуйте скільки заманеться.',
       },
       language: {
         q: 'Якою мовою буде церемонія?',

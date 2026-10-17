@@ -711,12 +711,41 @@ function formatDrive(minutes) {
 }
 
 renderers.push(() => {
-  const { venue, travel } = CONFIG;
+  const { travel } = CONFIG;
 
-  $('[data-venue-map]').href = venue.mapUrl;
-  $('[data-venue-media]').innerHTML = venue.mapEmbedUrl
-    ? `<iframe class="venue__map" src="${esc(venue.mapEmbedUrl)}" title="${esc(t('travel.venue.mapTitle'))}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
-    : photo('venue.jpg', t('travel.venue.alt'), 'venue__photo');
+  // The church first, then the manor: the order guests travel in.
+  $('[data-places]').innerHTML = [
+    ['church', 'church.jpg'],
+    ['venue', 'venue.jpg'],
+  ]
+    .map(([id, file], index) => {
+      const place = CONFIG[id];
+      const base = `travel.${id}`;
+      const media = place.mapEmbedUrl
+        ? `<iframe class="venue__map" src="${esc(place.mapEmbedUrl)}" title="${esc(t(`${base}.mapTitle`))}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
+        : photo(file, t(`${base}.alt`), 'venue__photo');
+      // The church's sign and map listing use its Lithuanian name; show it under ours.
+      const name = t(`${base}.name`);
+      const localName =
+        place.localName && place.localName !== name ? `<p class="venue__local" lang="lt">${esc(place.localName)}</p>` : '';
+      return `
+        <li class="card venue reveal" style="--delay: ${index * 0.12}s">
+          <div class="venue__media">${media}</div>
+          <div class="venue__body">
+            <p class="label">${esc(t(`${base}.label`))}</p>
+            <h3 class="venue__name">${esc(name)}</h3>
+            ${localName}
+            <address class="venue__address">
+              ${esc(place.address)}<br>
+              ${esc(place.town)}, ${esc(t('travel.country'))}
+            </address>
+            <a class="btn btn--ghost" href="${esc(place.mapUrl)}" target="_blank" rel="noopener">
+              ${icon('pin')}<span>${esc(t('travel.mapLink'))}</span>
+            </a>
+          </div>
+        </li>`;
+    })
+    .join('');
 
   const airports = travel.airports.map(
     (airport) => `

@@ -1,6 +1,6 @@
 # Wedding — Ugne & Dimon
 
-Wedding website for **Saturday, 7 August 2027** at Babtyno dvaras, near Kaunas (Lithuania).
+Wedding website for **Saturday, 7 August 2027** at the Church of St. George in Vilkija, followed by the celebration at Babtyno dvaras, near Kaunas (Lithuania).
 
 A static, single-page site: no framework, no build step, no dependencies. It tells
 guests the story, walks them through the day, shows the menu and the travel details,
@@ -55,7 +55,7 @@ that is expected and goes away as you add them.
 | --- | --- |
 | Date, ceremony time, time zone (drives the countdown) | `wedding` |
 | Photo-booth strip on the opening screen: which photos, and black-and-white / sepia / colour | `hero` |
-| Venue name, **street address**, map link or embedded map | `venue` |
+| The church (ceremony) and the manor (celebration): name, **street address**, map link or embedded map | `church`, `venue` |
 | Programme times and order; hide the "Times to be confirmed" badge | `programme`, `timesConfirmed` |
 | Which dishes are on the menu and their V / VG / GF tags; hide the "Sample menu" badge | `menu` |
 | Gallery photos | `gallery` |
@@ -73,7 +73,7 @@ language falls back to English, so nothing ever shows up blank.
 - To add a dish: add `{ id: 'myDish', tags: ['V'] }` to a course in `config.js`, then
   add `myDish: { name: '…', desc: '…' }` under `menu.items` in each language.
 - To add a programme step: add it to `programme` in `config.js` (icons available:
-  `arrival`, `rings`, `bread`, `glasses`, `banquet`, `dance`, `party`), then add its
+  `church`, `car`, `arrival`, `rings`, `bread`, `glasses`, `banquet`, `dance`, `party`), then add its
   `title` / `desc` / `where` under `programme.steps` in each language.
 - To add an FAQ entry: add a `{ q, a }` pair under `faq.items` in each language.
 - A few date phrases are written out by hand and are **not** derived from `config.js`:
@@ -128,6 +128,7 @@ Two things to know before going live:
 
 - [ ] Photos added (`assets/photos/`)
 - [ ] Venue street address (`venue.address`)
+- [ ] Church → manor transport confirmed (programme `transfer` step, Travel note, FAQ)
 - [ ] Programme times confirmed, then `timesConfirmed: true`
 - [ ] Final menu, then `menu.isSample: false`
 - [ ] RSVP deadline confirmed and a real `rsvp.backend` configured and tested

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ugne &amp; Dimon — 7 August 2027</title>
-  <meta name="description" content="Ugne and Dimon are getting married on 7 August 2027 at Babtyno dvaras, near Kaunas, Lithuania. The day, the menu, travel and RSVP.">
+  <meta name="description" content="Ugne and Dimon are getting married on 7 August 2027 at the Church of St. George in Vilkija, with the celebration at Babtyno dvaras, near Kaunas, Lithuania. The day, the menu, travel and RSVP.">
   <!-- A private invitation: keep it out of search engines. Remove this line if you want it indexed. -->
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#2B2622">
@@ -54,6 +54,8 @@
       <circle cx="32" cy="19" r="8"/><circle cx="45" cy="32" r="8"/><circle cx="32" cy="45" r="8"/><circle cx="19" cy="32" r="8"/>
     </symbol>
 
+    <symbol id="i-church" viewBox="0 0 24 24"><path d="M12 1.5v5M10 3.5h4M7 21V11.5l5-5 5 5V21M3.5 21v-6.5L7 12.5M20.5 21v-6.5L17 12.5M2.5 21h19M10 21v-3.5a2 2 0 0 1 4 0V21"/><circle cx="12" cy="12.5" r="1.5"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M5.5 17H3.5v-4.5l2-4.8A1.5 1.5 0 0 1 6.9 6.8h10.2a1.5 1.5 0 0 1 1.4.9l2 4.8V17h-2M9.5 17h5M3.5 12.5h17M8 9.5h8"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/></symbol>
     <symbol id="i-arrival" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 9.5V20h14V9.5M10 20v-6h4v6"/></symbol>
     <symbol id="i-rings" viewBox="0 0 24 24"><circle cx="9" cy="14.5" r="5"/><circle cx="15" cy="14.5" r="5"/><path d="M7.5 6.5 9 4.5l1.5 2L9 9z"/></symbol>
     <symbol id="i-bread" viewBox="0 0 24 24"><path d="M4 13a8 5.5 0 0 1 16 0v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM9 9.5v3M12 8.5v3M15 9.5v3"/></symbol>
@@ -161,7 +163,7 @@
                       <time datetime="2027-08-07" data-hero-date><span aria-hidden="true" data-hero-date-digits>07 · 08 · 2027</span></time>
                     </p>
                     <p class="envelope__line card__long" style="--n: 2" data-hero-date-text>7 August 2027</p>
-                    <p class="envelope__line label card__place" style="--n: 3" data-i18n="hero.place">Babtyno dvaras • Kaunas, Lithuania</p>
+                    <p class="envelope__line label card__place" style="--n: 3" data-i18n="hero.place">Vilkija &amp; Babtyno dvaras • Lithuania</p>
                     <p class="envelope__line" style="--n: 4">
                       <a class="btn btn--ghost card__open" href="#story" data-envelope-link data-i18n="hero.open">Open invitation</a>
                     </p>
@@ -331,24 +333,12 @@
         <header class="section__head reveal">
           <p class="label" data-i18n="travel.label">Getting there</p>
           <h2 class="title" data-i18n="travel.title">Travel &amp; Stay</h2>
-          <p class="lead" data-i18n="travel.intro">Babtyno dvaras is a manor estate in Babtai, about 24 km north of Kaunas.</p>
+          <p class="lead" data-i18n="travel.intro">We marry at the Church of St. George in Vilkija and celebrate at Babtyno dvaras, near Kaunas.</p>
         </header>
 
-        <article class="card venue reveal">
-          <div class="venue__media" data-venue-media></div>
-          <div class="venue__body">
-            <p class="label" data-i18n="travel.venue.label">The venue</p>
-            <h3 class="venue__name" data-config="venue.name">Babtyno dvaras</h3>
-            <address class="venue__address">
-              <span data-config="venue.address">TBC — street address to be confirmed</span><br>
-              <span data-config="venue.town">Babtai, Kaunas District</span>, <span data-i18n="travel.venue.country">Lithuania</span>
-            </address>
-            <a class="btn btn--ghost" data-venue-map target="_blank" rel="noopener">
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>
-              <span data-i18n="travel.venue.mapLink">Open in Google Maps</span>
-            </a>
-          </div>
-        </article>
+        <!-- The church, then the manor. Built from CONFIG.church / CONFIG.venue -->
+        <ul class="places" data-places></ul>
+        <p class="places__note reveal" data-i18n="travel.between">The ceremony is at the church in Vilkija; the celebration continues at Babtyno dvaras. How to get from one to the other is still to be confirmed — we are looking into a shuttle.</p>
 
         <!-- Airports from CONFIG.travel, then the stay and shuttle placeholders -->
         <ul class="travel-cards" data-travel-cards></ul>
@@ -541,7 +531,7 @@
       <div class="letter__content">
         <svg class="ornament letter__line" style="--n: 0" viewBox="0 0 240 24" aria-hidden="true" focusable="false"><use href="#i-ornament"/></svg>
         <h2 class="letter__title letter__line" style="--n: 1" id="letter-title" data-i18n="letter.title">We’re getting married!</h2>
-        <p class="letter__body letter__line" style="--n: 2" data-i18n="letter.body">On the 7th of August 2027 we would love to share a very special day with you at Babtyno dvaras, Kaunas, Lithuania — where a love story between two cultures comes together as one, our own Pangea.</p>
+        <p class="letter__body letter__line" style="--n: 2" data-i18n="letter.body">On the 7th of August 2027 we would love to share a very special day with you. We will marry at the Church of St. George in Vilkija and celebrate at Babtyno dvaras, near Kaunas, Lithuania — where a love story between two cultures comes together as one, our own Pangea.</p>
         <p class="letter__closing letter__line" style="--n: 3" data-i18n="letter.closing">We invite you to discover our love story.</p>
         <p class="letter__signature letter__line" style="--n: 4" data-i18n="letter.signature">Ugne &amp; Dimon</p>
         <p class="letter__line" style="--n: 5">

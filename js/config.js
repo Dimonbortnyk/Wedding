@@ -5,6 +5,11 @@
  * in this file. Words (titles, descriptions, dish names) are edited in
  * js/i18n.js, once per language.
  */
+
+/** A Google Maps search link for a place, built from its name and address. */
+const mapsSearch = (...parts) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(parts.filter(Boolean).join(', '))}`;
+
 export const CONFIG = {
   couple: {
     first: 'Ugne',
@@ -14,8 +19,8 @@ export const CONFIG = {
 
   wedding: {
     date: '2027-08-07',
-    // Used by the countdown. Keep in sync with the "ceremony" step in `programme`.
-    ceremonyTime: '15:30',
+    // Used by the countdown: the church ceremony. Keep in sync with the "ceremony" step in `programme`.
+    ceremonyTime: '13:00',
     timezone: 'Europe/Vilnius',
     // Lithuania is on EEST (UTC+3) in August.
     utcOffset: '+03:00',
@@ -27,6 +32,20 @@ export const CONFIG = {
     booth: ['booth-01.jpg', 'booth-02.jpg', 'booth-03.jpg', 'booth-04.jpg'],
     // How the strip is toned: 'bw' | 'sepia' | 'none'. Upload colour photos as they are.
     boothFilter: 'bw',
+  },
+
+  // The day has two places: the church ceremony first, then the celebration at the manor.
+  // Names shown on the site are translated in i18n.js → travel.church / travel.venue.
+  church: {
+    name: 'Church of St. George',
+    // The name on the sign and in Google Maps.
+    localName: 'Šv. Jurgio bažnyčia',
+    address: 'Bažnyčios g. 19',
+    town: 'Vilkija, 54227 Kauno r. sav.',
+    country: 'Lithuania',
+    mapUrl: mapsSearch('Šv. Jurgio bažnyčia', 'Bažnyčios g. 19', 'Vilkija', '54227 Kauno r. sav.', 'Lithuania'),
+    // Optional: paste a Google Maps "embed" URL here to show a live map instead of the photo.
+    mapEmbedUrl: '',
   },
 
   venue: {
@@ -43,16 +62,18 @@ export const CONFIG = {
   // While false, the programme shows a "Times to be confirmed" notice.
   timesConfirmed: false,
 
-  // The guest journey. Titles and descriptions: i18n.js → programme.steps.<id>.
+  // The guest journey. Titles, descriptions and places: i18n.js → programme.steps.<id>.
   // `featured` steps also get a photo card; `photo` is a file in assets/photos/.
+  // The day starts at the church in Vilkija and moves on to Babtyno dvaras.
   programme: [
-    { id: 'arrival', time: '15:00', icon: 'arrival' },
-    { id: 'ceremony', time: '15:30', icon: 'rings', featured: true, photo: 'venue.jpg' },
-    { id: 'breadSalt', time: '16:15', icon: 'bread' },
-    { id: 'cava', time: '16:30', icon: 'glasses', featured: true, photo: 'gallery-03.jpg' },
-    { id: 'banquet', time: '18:00', icon: 'banquet', featured: true, photo: 'gallery-05.jpg' },
-    { id: 'firstDance', time: '21:00', icon: 'dance' },
-    { id: 'party', time: '21:30', icon: 'party', featured: true, photo: 'gallery-07.jpg' },
+    { id: 'arrival', time: '12:30', icon: 'church' },
+    { id: 'ceremony', time: '13:00', icon: 'church', featured: true, photo: 'church.jpg' },
+    { id: 'transfer', time: '14:00', icon: 'car' },
+    { id: 'breadSalt', time: '14:45', icon: 'bread' },
+    { id: 'cava', time: '15:00', icon: 'glasses', featured: true, photo: 'venue.jpg' },
+    { id: 'banquet', time: '17:00', icon: 'banquet', featured: true, photo: 'gallery-05.jpg' },
+    { id: 'firstDance', time: '20:00', icon: 'dance' },
+    { id: 'party', time: '20:30', icon: 'party', featured: true, photo: 'gallery-07.jpg' },
   ],
 
   // Our Story. Texts: i18n.js → story.items.<id>.
@@ -130,7 +151,7 @@ export const CONFIG = {
     'gallery-08.jpg',
   ],
 
-  // Approximate drive times to the venue, in minutes. Verify before sharing.
+  // Approximate drive times to Babtyno dvaras, in minutes. Verify before sharing.
   travel: {
     airports: [
       { id: 'kun', code: 'KUN', driveMinutes: 30 },
