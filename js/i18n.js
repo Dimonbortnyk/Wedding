@@ -179,11 +179,6 @@ const en = {
         title: 'Elegant summer attire',
         text: 'Light fabrics and garden-friendly shoes — the ceremony is in church, and part of the afternoon is out on the lawn.',
       },
-      kids: {
-        label: 'Children',
-        title: 'To be confirmed',
-        text: 'We are still working out the details and will share them here soon.',
-      },
       plusOnes: {
         label: 'Plus-ones',
         title: 'To be confirmed',
@@ -376,10 +371,6 @@ const en = {
       plusOnes: {
         q: 'Can I bring a plus-one?',
         a: 'Your invitation will name everyone we are expecting. If you are not sure, just ask us.',
-      },
-      kids: {
-        q: 'Are children welcome?',
-        a: 'We are finalising the details and will update this page soon. If you are hoping to travel with little ones, mention it in your RSVP note.',
       },
       parking: {
         q: 'Is there parking at the church and the manor?',
@@ -576,11 +567,6 @@ const es = {
         title: 'Elegante de verano',
         text: 'Tejidos ligeros y zapatos aptos para el jardín: la ceremonia es en la iglesia y parte de la tarde transcurre sobre el césped.',
       },
-      kids: {
-        label: 'Niños',
-        title: 'Por confirmar',
-        text: 'Todavía estamos cerrando los detalles; los publicaremos aquí pronto.',
-      },
       plusOnes: {
         label: 'Acompañantes',
         title: 'Por confirmar',
@@ -772,10 +758,6 @@ const es = {
       plusOnes: {
         q: '¿Puedo llevar acompañante?',
         a: 'En tu invitación figurarán todas las personas que esperamos. Si tienes dudas, pregúntanos.',
-      },
-      kids: {
-        q: '¿Pueden venir niños?',
-        a: 'Estamos cerrando los detalles y actualizaremos esta página pronto. Si piensas viajar con peques, coméntalo en la nota de tu confirmación.',
       },
       parking: {
         q: '¿Hay aparcamiento en la iglesia y en la mansión?',
@@ -973,11 +955,6 @@ const lt = {
         title: 'Elegantiška vasariška apranga',
         text: 'Lengvi audiniai ir žolei tinkama avalynė — ceremonija vyks bažnyčioje, o dalis popietės — pievoje.',
       },
-      kids: {
-        label: 'Vaikai',
-        title: 'Bus patikslinta',
-        text: 'Dar deriname detales ir netrukus jomis pasidalinsime čia.',
-      },
       plusOnes: {
         label: 'Palydovai',
         title: 'Bus patikslinta',
@@ -1169,10 +1146,6 @@ const lt = {
       plusOnes: {
         q: 'Ar galiu atsivesti palydovą?',
         a: 'Kvietime bus įrašyti visi, kurių laukiame. Jei abejojate — tiesiog paklauskite mūsų.',
-      },
-      kids: {
-        q: 'Ar galima atvykti su vaikais?',
-        a: 'Dar deriname detales ir netrukus atnaujinsime šį puslapį. Jei planuojate keliauti su mažaisiais, paminėkite tai atsakymo žinutėje.',
       },
       parking: {
         q: 'Ar prie bažnyčios ir dvaro galima pasistatyti automobilį?',
@@ -1370,11 +1343,6 @@ const uk = {
         title: 'Елегантне літнє вбрання',
         text: 'Легкі тканини та взуття, зручне для саду: вінчання відбудеться в костелі, а частина дня мине на галявині.',
       },
-      kids: {
-        label: 'Діти',
-        title: 'Уточнюється',
-        text: 'Ми ще узгоджуємо деталі й невдовзі поділимося ними тут.',
-      },
       plusOnes: {
         label: 'Супутники',
         title: 'Уточнюється',
@@ -1566,10 +1534,6 @@ const uk = {
       plusOnes: {
         q: 'Чи можна прийти з парою?',
         a: 'У запрошенні будуть зазначені всі, на кого ми чекаємо. Якщо маєте сумніви — просто запитайте нас.',
-      },
-      kids: {
-        q: 'Чи можна з дітьми?',
-        a: 'Ми ще узгоджуємо деталі й невдовзі оновимо цю сторінку. Якщо плануєте їхати з малечею, згадайте про це в примітці до відповіді.',
       },
       parking: {
         q: 'Чи є паркування біля костелу та маєтку?',
