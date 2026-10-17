@@ -9,3 +9,6 @@ Thumbs.db
 
 # Full-size, unprocessed photos (may carry EXIF/GPS) — never publish these
 assets/photos/_originals/
+
+# Design references (mock-ups, inspiration) — not part of the site
+Design/

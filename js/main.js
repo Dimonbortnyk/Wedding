@@ -288,7 +288,7 @@ setups.push(() => {
     return;
   }
 
-  // Only the heart opens it (click, tap, Enter or Space). Until then the card's button is
+  // Only the seal opens it (click, tap, Enter or Space). Until then the card's button is
   // sealed inside: out of the tab order, so Tab lands on the seal, but still read by
   // screen readers along with the rest of the card.
   link.tabIndex = -1;
